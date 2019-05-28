@@ -15,7 +15,9 @@ def change_passwd_func(old_passwd, new_passwd):
     return True
 
 def _verify_passwd(passwd):
-    return False
+    if len(passwd) < 18:
+        return False
+    return True
 
 def _similar_passwrd(old_passwd, new_passwd):
     return False
