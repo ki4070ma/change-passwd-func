@@ -16,6 +16,10 @@ def change_passwd_func(old_passwd, new_passwd):
 
 def _verify_passwd(passwd):
     if len(passwd) < 18:
+        print('not enough length')
+        return False
+    elif len([False for x in passwd if not (x.isalnum() or x in ['!', '@', '#', '$', '&', '*'])]) > 0:
+        print('included invalid char')
         return False
     return True
 
