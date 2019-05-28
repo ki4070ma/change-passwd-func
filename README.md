@@ -1,0 +1,1 @@
+# change-passwd-func
