@@ -8,10 +8,10 @@ def verify_passwd(passwd):
     if len(passwd) < 18:
         print('not enough length')
         return False
-    elif not _include_valid_char(passwd):
+    elif _include_invalid_char(passwd):
         print('included invalid char')
         return False
-    elif not _include_all_patterns(passwd):
+    elif _include_not_all_patterns(passwd):
         print("didn't include all pattern")
         return False
     elif _include_continuous_5_same_chars(passwd):
@@ -26,14 +26,14 @@ def verify_passwd(passwd):
     return True
 
 
-def _include_valid_char(passwd):
+def _include_invalid_char(passwd):
     for x in passwd:
         if not x.isalnum() and x not in SP_CHARS:
-            return False
-    return True
+            return True
+    return False
 
 
-def _include_all_patterns(passwd):
+def _include_not_all_patterns(passwd):
     upper_flg = False
     lower_flg = False
     num_flg = False
@@ -48,8 +48,8 @@ def _include_all_patterns(passwd):
         elif x in SP_CHARS:
             special_flg = True
         if upper_flg and lower_flg and num_flg and special_flg:
-            break
-    return upper_flg and lower_flg and num_flg and special_flg
+            return False
+    return True
 
 
 def _include_continuous_5_same_chars(passwd):
@@ -59,6 +59,7 @@ def _include_continuous_5_same_chars(passwd):
         if x == prev_char:
             count += 1
         else:
+            # Reset
             count = 1
             prev_char = x
         if count > 4:
