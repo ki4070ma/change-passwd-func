@@ -25,11 +25,13 @@ def verify_passwd(passwd):
         return False
     return True
 
+
 def _include_valid_char(passwd):
     for x in passwd:
         if not x.isalnum() and x not in SP_CHARS:
             return False
     return True
+
 
 def _include_all_patterns(passwd):
     upper_flg = False
@@ -49,6 +51,7 @@ def _include_all_patterns(passwd):
             break
     return upper_flg and lower_flg and num_flg and special_flg
 
+
 def _include_continuous_5_same_chars(passwd):
     count = 1
     prev_char = passwd[0]
@@ -62,11 +65,13 @@ def _include_continuous_5_same_chars(passwd):
             return True
     return False
 
+
 def _include_more_than_4_sp_char(passwd):
     count = 0
     for c in SP_CHARS:
         count += passwd.count(c)
     return count > 4
+
 
 def _include_num_more_than_half_of_length(passwd):
     count = 0
@@ -74,6 +79,7 @@ def _include_num_more_than_half_of_length(passwd):
         if c.isnumeric():
             count += 1
     return count > len(passwd) / 2.0
+
 
 if __name__ == '__main__':
     pass
