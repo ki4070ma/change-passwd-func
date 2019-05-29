@@ -20,6 +20,9 @@ def verify_passwd(passwd):
     elif _include_more_than_4_sp_char(passwd):
         print('included more than 4 special characters')
         return False
+    elif _include_num_more_than_half_of_length(passwd):
+        print('More than 4 special characters')
+        return False
     return True
 
 def _include_valid_char(passwd):
@@ -65,6 +68,12 @@ def _include_more_than_4_sp_char(passwd):
         count += passwd.count(c)
     return count > 4
 
+def _include_num_more_than_half_of_length(passwd):
+    count = 0
+    for c in passwd:
+        if c.isnumeric():
+            count += 1
+    return count > len(passwd) / 2.0
 
 if __name__ == '__main__':
     pass

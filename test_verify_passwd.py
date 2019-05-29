@@ -2,7 +2,7 @@
 
 import pytest
 
-from helper.helper import passwd_padding, SP_CHARS
+from helper.helper import passwd_padding, SP_CHARS, VALID_BASE_PASSWD_LEN4
 from verify_passwd import verify_passwd
 
 
@@ -39,3 +39,8 @@ def test_change_passwd_func_less_than_5_sp_char(sp_char_num):
 def test_change_passwd_func_more_than_4_sp_char(sp_char_num):
     sp_chars = passwd_padding(length=sp_char_num, padding_src_str=SP_CHARS, include_sp_char=False)
     assert not verify_passwd(passwd_padding(string=sp_chars, include_sp_char=False))
+
+@pytest.mark.parametrize('length', [20, 21])  # even, odd
+def test_change_passwd_func_num_more_than_half_of_length(length):
+    # VALID_BASE_PASSWD_LEN4 -> num : non num = 1 : 1
+    assert verify_passwd(passwd_padding(string='1', length=length, padding_src_str=VALID_BASE_PASSWD_LEN4))
