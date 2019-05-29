@@ -2,7 +2,9 @@
 
 from helper.helper import SP_CHARS
 
+
 def verify_passwd(passwd):
+    print(passwd)
     if len(passwd) < 18:
         print('not enough length')
         return False
@@ -45,3 +47,7 @@ def _include_continuous_4_same_chars(passwd):
         if count > 3:
             return True
     return False
+
+
+if __name__ == '__main__':
+    pass

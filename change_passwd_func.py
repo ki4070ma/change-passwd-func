@@ -2,8 +2,9 @@
 
 #import pysnooper
 
-from verify_passwd import verify_passwd
 from check_similarity import check_similarity
+from verify_passwd import verify_passwd
+
 
 def change_passwd_func(old_passwd, new_passwd):
     print('old_passwd: {}'.format(old_passwd))
