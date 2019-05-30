@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-SP_CHARS = ['!', '@', '#', '$', '&', '*']
+from change_passwd_func.constants import SP_CHARS
 
 VALID_PASSWD_BASE = '1aB2'
 

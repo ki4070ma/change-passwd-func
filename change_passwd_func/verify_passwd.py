@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from change_passwd_func.helper.helper import SP_CHARS
+from change_passwd_func.constants import SP_CHARS
 
 
 def verify_passwd(passwd):
@@ -12,7 +12,7 @@ def verify_passwd(passwd):
         print('included invalid char')
         return False
     elif _include_not_all_patterns(passwd):
-        print("didn't include all pattern")
+        print("didn't include all necessary patterns")
         return False
     elif _include_continuous_5_same_chars(passwd):
         print('included continous 4 same chars')
@@ -21,7 +21,7 @@ def verify_passwd(passwd):
         print('included more than 4 special characters')
         return False
     elif _include_num_more_than_half_of_length(passwd):
-        print('More than 4 special characters')
+        print('50 % of password should not be a number')
         return False
     return True
 
