@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from helper.helper import SP_CHARS
+from change_passwd_func.helper.helper import SP_CHARS
 
 
 def verify_passwd(passwd):

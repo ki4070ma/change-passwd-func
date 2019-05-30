@@ -2,8 +2,9 @@
 
 import pytest
 
-from helper.helper import create_passwd, SP_CHARS, VALID_PASSWD_BASE
-from verify_passwd import verify_passwd
+#from change_passwd_func.helper.helper import create_passwd, SP_CHARS, VALID_PASSWD_BASE
+from change_passwd_func.helper.helper import create_passwd, SP_CHARS, VALID_PASSWD_BASE
+from change_passwd_func.verify_passwd import verify_passwd
 
 
 @pytest.mark.parametrize('length', [0, 16, 17])
