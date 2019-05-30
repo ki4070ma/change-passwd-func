@@ -12,7 +12,7 @@ def create_passwd(incl_str='', length=MIN_VALID_LENGTH, padding_src_str=VALID_PA
         incl_str(str): Strings added to the HEAD of password. Default is empty str.
         length(int): Length for passwords. Default is `MIN_VALID_LENGTH`
         padding_src_str(str): Strings used for password padding.
-            Strings used repeatedly until filling `lengt`. Default is `VALID_PASSWD_BASE`
+            Strings used repeatedly until filling `length`. Default is `VALID_PASSWD_BASE`
         incl_sp_char(bool): Add special char to teh TAIL of password or not.
             Need at least one special char for valid password. Default is True
 
