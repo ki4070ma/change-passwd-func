@@ -1,3 +1,13 @@
+# ASSIGNMENT
+## HOW TO RUN TEST
+
+```
+(setup python environment. eihter py2 or py3)
+pip install pytest
+cd /path/to/change_passwd_func
+py.test
+```
+
 # Objective
 We want you to create a change password function based on below specification.
 This change password function will just return True or False back to function caller to inform the caller
