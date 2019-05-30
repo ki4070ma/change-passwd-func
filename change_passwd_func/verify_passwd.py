@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 
-from change_passwd_func.constants import SP_CHARS
+from change_passwd_func.constants import (
+    SP_CHARS,
+    MIN_VALID_LENGTH,
+    MAX_CHAR_CONTINUOUS_NUM,
+    MAX_SP_CHAR_NUM
+)
 
 
 def verify_passwd(passwd):
     print(passwd)
-    if len(passwd) < 18:
+    if len(passwd) < MIN_VALID_LENGTH:
         print('not enough length')
         return False
     elif _include_invalid_char(passwd):
@@ -14,10 +19,10 @@ def verify_passwd(passwd):
     elif _include_not_all_patterns(passwd):
         print("didn't include all necessary patterns")
         return False
-    elif _include_continuous_5_same_chars(passwd):
+    elif _include_over_continuous_same_chars(passwd):
         print('included continous 4 same chars')
         return False
-    elif _include_more_than_4_sp_char(passwd):
+    elif _include_over_sp_char_num(passwd):
         print('included more than 4 special characters')
         return False
     elif _include_num_more_than_half_of_length(passwd):
@@ -52,7 +57,7 @@ def _include_not_all_patterns(passwd):
     return True
 
 
-def _include_continuous_5_same_chars(passwd):
+def _include_over_continuous_same_chars(passwd):
     count = 1
     prev_char = passwd[0]
     for x in list(passwd)[1:]:
@@ -62,16 +67,16 @@ def _include_continuous_5_same_chars(passwd):
             # Reset
             count = 1
             prev_char = x
-        if count > 4:
+        if count > MAX_CHAR_CONTINUOUS_NUM:
             return True
     return False
 
 
-def _include_more_than_4_sp_char(passwd):
+def _include_over_sp_char_num(passwd):
     count = 0
     for c in SP_CHARS:
         count += passwd.count(c)
-    return count > 4
+    return count > MAX_SP_CHAR_NUM
 
 
 def _include_num_more_than_half_of_length(passwd):
