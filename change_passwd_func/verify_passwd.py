@@ -5,6 +5,7 @@ import re
 from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,
     MAX_SP_CHAR_NUM,
+    MAX_VALID_LENGTH,
     MIN_VALID_LENGTH,
     SP_CHARS
 )
@@ -12,7 +13,7 @@ from .constants import (
 
 def verify_passwd(passwd):
     print('[passwd]: {}'.format(passwd))
-    if len(passwd) < MIN_VALID_LENGTH:
+    if len(passwd) < MIN_VALID_LENGTH or len(passwd) > MAX_VALID_LENGTH:
         print('Length {} is not enough. Needs to be at least {}'.format(len(passwd), MIN_VALID_LENGTH))
         return False
     elif _include_invalid_char(passwd):

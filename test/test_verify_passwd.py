@@ -7,6 +7,7 @@ import pytest
 from change_passwd_func.constants import (
     MAX_CHAR_CONTINUOUS_NUM,
     MAX_SP_CHAR_NUM,
+    MAX_VALID_LENGTH,
     MIN_VALID_LENGTH,
     SP_CHARS
 )
@@ -16,13 +17,18 @@ from change_passwd_func.verify_passwd import verify_passwd
 class TestVerifyPasswd(object):
 
     class TestVerifyPasswdLength(object):
-        # TestIdx: 1, 2
-        @pytest.mark.parametrize('length', [0, MIN_VALID_LENGTH-1])
+        # TestIdx: 1
+        @pytest.mark.parametrize('length', [0])
+        def test_verify_passwd_not_enough_length_0(self, length):
+            assert not verify_passwd(pswd_generator(length=length, incl_sp_char=False))
+
+        # TestIdx: 2
+        @pytest.mark.parametrize('length', [MIN_VALID_LENGTH-1, MAX_VALID_LENGTH+1])
         def test_verify_passwd_not_enough_length(self, length):
             assert not verify_passwd(pswd_generator(length=length))
 
         # TestIdx: 3, 4
-        @pytest.mark.parametrize('length', [MIN_VALID_LENGTH, MIN_VALID_LENGTH+1, 1000])
+        @pytest.mark.parametrize('length', [MIN_VALID_LENGTH, MIN_VALID_LENGTH+1, MAX_VALID_LENGTH])
         def test_verify_passwd_valid_length_18(self, length):
             assert verify_passwd(pswd_generator(length=length))
 
