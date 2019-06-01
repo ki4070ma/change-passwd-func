@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import re
+
 from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,
     MAX_SP_CHAR_NUM,
@@ -34,7 +36,7 @@ def verify_passwd(passwd):
 
 def _include_invalid_char(passwd):
     for x in passwd:
-        if not x.isalnum() and x not in SP_CHARS:
+        if not bool(re.search('[0-9a-zA-Z]', x)) and x not in SP_CHARS:  # x.isalnum() unavailable for Hiragana, Kanji, etc
             return True
     return False
 

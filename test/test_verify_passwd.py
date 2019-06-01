@@ -31,6 +31,10 @@ class TestVerifyPasswd(object):
         def test_verify_passwd_invalid_char(self):
             assert not verify_passwd(pswd_generator(incl_invalid_char=True))
 
+        @pytest.mark.parametrize('invalid_char', ['あ', '^', '朝', 'ไทย', 'Ａ'])
+        def test_verify_passwd_various_invalid_char(self, invalid_char):
+            assert not verify_passwd(pswd_generator(pswd_base=invalid_char))
+
     class TestVerifyPasswdSpecialChar(object):
         # TestIdx: 6
         def test_verify_passwd_non_valid_special_char(self):
@@ -61,6 +65,8 @@ class TestVerifyPasswd(object):
             assert not verify_passwd(pswd_generator(pswd_base=pswd, incl_sp_char=False))
 
     class TestVerifyPasswdNumericLimitation(object):
+        # TODO Hard to understand how password generated for these cases
+
         # TestIdx: 14
         @pytest.mark.parametrize('length', [21])  # [odd] num:10, alphabet:10, sp:1
         def test_verify_passwd_num_less_than_half_of_length_odd(self, length):
