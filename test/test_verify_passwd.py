@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from test.helper.helper import create_passwd
+
 import pytest
 
 from change_passwd_func.constants import (
@@ -8,7 +10,6 @@ from change_passwd_func.constants import (
     MIN_VALID_LENGTH,
     SP_CHARS
 )
-from test.helper.helper import create_passwd
 from change_passwd_func.verify_passwd import verify_passwd
 
 

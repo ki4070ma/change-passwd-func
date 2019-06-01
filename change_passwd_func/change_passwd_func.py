@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-#import pysnooper
-
 from change_passwd_func.check_similarity import check_similarity
 from change_passwd_func.verify_passwd import verify_passwd
 
