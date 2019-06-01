@@ -2,11 +2,12 @@
 
 from Levenshtein import distance
 
-from constants import SIMILARITY_THRESHOLD
+from .constants import SIMILARITY_THRESHOLD
 
 
 def check_similarity(string1, string2):
     normalized_distance = distance(string1, string2) / max(len(string1), len(string2))
+    print(normalized_distance)
     return normalized_distance < 1 - SIMILARITY_THRESHOLD
 
 
