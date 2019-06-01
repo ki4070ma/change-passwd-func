@@ -11,7 +11,7 @@ from .constants import (
 def verify_passwd(passwd):
     print('[passwd]: {}'.format(passwd))
     if len(passwd) < MIN_VALID_LENGTH:
-        print('not enough length')
+        print('Length {} is not enough. Needs to be at least {}'.format(len(passwd), MIN_VALID_LENGTH))
         return False
     elif _include_invalid_char(passwd):
         print('included invalid char')

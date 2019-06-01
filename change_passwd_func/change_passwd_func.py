@@ -11,11 +11,9 @@ def change_passwd_func(old_passwd, new_passwd):
     if not verify_passwd(old_passwd):
         # SHOULD NOT be here for old password. Old password must meet password requirements
         print('[NG] Could not change password due to invalid old password')
-        print('Password: {}'.format(old_passwd))
         return False
     elif not verify_passwd(new_passwd):
         print('[NG] Could not change password due to invalid new password')
-        print('Password: {}'.format(new_passwd))
         return False
     elif not check_similarity(old_passwd, new_passwd):
         print('[NG] Could not change password due to similar to previous one')
