@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from change_passwd_func.constants import (
+from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,
     MAX_SP_CHAR_NUM,
     MIN_VALID_LENGTH,
@@ -9,7 +9,7 @@ from change_passwd_func.constants import (
 
 
 def verify_passwd(passwd):
-    print(passwd)
+    print('[passwd]: {}'.format(passwd))
     if len(passwd) < MIN_VALID_LENGTH:
         print('not enough length')
         return False
@@ -28,6 +28,7 @@ def verify_passwd(passwd):
     elif _include_num_more_than_half_of_length(passwd):
         print('50 % of password should not be a number')
         return False
+    print('Valid passwd')
     return True
 
 
