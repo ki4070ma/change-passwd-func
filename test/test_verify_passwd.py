@@ -51,19 +51,6 @@ class TestVerifyPasswd(object):
         def test_verify_passwd_over_continuous_same_char_num(self, continous_num):
             assert not verify_passwd(pswd_generator(pswd_base='a' * continous_num))
 
-    class TestVerifyPasswdSpecialCharNum(object):
-        # TestIdx: 19, 20
-        @pytest.mark.parametrize('sp_char_num', [MAX_SP_CHAR_NUM-1, MAX_SP_CHAR_NUM])
-        def test_verify_passwd_valid_sp_char_num(self, sp_char_num):
-            pswd = ''.join([SP_CHARS[i % len(SP_CHARS)] for i in range(sp_char_num)])
-            assert verify_passwd(pswd_generator(pswd_base=pswd, incl_sp_char=False))
-
-        # TestIdx: 21
-        @pytest.mark.parametrize('sp_char_num', [MAX_SP_CHAR_NUM+1])
-        def test_verify_passwd_over_sp_char_num(self, sp_char_num):
-            pswd = ''.join([SP_CHARS[i % len(SP_CHARS)] for i in range(sp_char_num)])
-            assert not verify_passwd(pswd_generator(pswd_base=pswd, incl_sp_char=False))
-
     class TestVerifyPasswdNumericLimitation(object):
         # TODO Hard to understand how password generated for these cases
 
@@ -90,3 +77,16 @@ class TestVerifyPasswd(object):
         @pytest.mark.parametrize('length', [20])  # [even] num:11, alphabet:8, sp:1
         def test_verify_passwd_num_more_than_half_of_length_even(self, length):
             assert not verify_passwd(pswd_generator(pswd_base='!123', length=length, incl_sp_char=False))
+
+    class TestVerifyPasswdSpecialCharNum(object):
+        # TestIdx: 19, 20
+        @pytest.mark.parametrize('sp_char_num', [MAX_SP_CHAR_NUM-1, MAX_SP_CHAR_NUM])
+        def test_verify_passwd_valid_sp_char_num(self, sp_char_num):
+            pswd = ''.join([SP_CHARS[i % len(SP_CHARS)] for i in range(sp_char_num)])
+            assert verify_passwd(pswd_generator(pswd_base=pswd, incl_sp_char=False))
+
+        # TestIdx: 21
+        @pytest.mark.parametrize('sp_char_num', [MAX_SP_CHAR_NUM+1])
+        def test_verify_passwd_over_sp_char_num(self, sp_char_num):
+            pswd = ''.join([SP_CHARS[i % len(SP_CHARS)] for i in range(sp_char_num)])
+            assert not verify_passwd(pswd_generator(pswd_base=pswd, incl_sp_char=False))
