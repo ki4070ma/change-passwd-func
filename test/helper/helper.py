@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from change_passwd_func.constants import SP_CHARS, MIN_VALID_LENGTH
+from change_passwd_func.constants import MIN_VALID_LENGTH, SP_CHARS
 
 VALID_PASSWD_BASE = '1aB2'
 
@@ -20,7 +20,7 @@ def create_passwd(incl_str='', length=MIN_VALID_LENGTH, padding_src_str=VALID_PA
         str: Genrated password
     '''
     l = len(padding_src_str)
-    for i in range(length):
+    for i in range(length-len(incl_str)):
         incl_str += padding_src_str[i % l]
     if incl_sp_char:
         incl_str = incl_str[:-1] + SP_CHARS[0]

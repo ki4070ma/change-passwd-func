@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
+from test.helper.helper import create_passwd
+
 import pytest
 
 from change_passwd_func.constants import (
-    SP_CHARS,
-    MAX_SP_CHAR_NUM,
     MAX_CHAR_CONTINUOUS_NUM,
-    MIN_VALID_LENGTH
+    MAX_SP_CHAR_NUM,
+    MIN_VALID_LENGTH,
+    SP_CHARS
 )
-from change_passwd_func.helper.helper import create_passwd
 from change_passwd_func.verify_passwd import verify_passwd
 
 
@@ -54,7 +55,18 @@ class TestVerifyPasswd(object):
             assert not verify_passwd(create_passwd(incl_str=sp_chars, incl_sp_char=False))
 
     class TestVerifyPasswdNumericLimitation(object):
-        @pytest.mark.parametrize('length', [20, 21])  # even, odd
-        def test_verify_passwd_num_more_than_half_of_length(self, length):
-            # VALID_BASE_PASSWD_LEN4 -> num : non num = 1 : 1
-            assert verify_passwd(create_passwd(incl_str='1', length=length))
+        @pytest.mark.parametrize('length', [20])  # [even] num:10, alphabet:9, sp:1  # TODO hard to understand
+        def test_verify_passwd_num_more_than_half_of_length_even(self, length):
+            assert verify_passwd(create_passwd(incl_str='!1', length=length, incl_sp_char=False))
+
+        @pytest.mark.parametrize('length', [21])  # [odd] num:10, alphabet:10, sp:1  # TODO hard to understand
+        def test_verify_passwd_num_more_than_half_of_length_odd(self, length):
+            assert verify_passwd(create_passwd(incl_str='!1', length=length, incl_sp_char=False))
+
+        @pytest.mark.parametrize('length', [20])  # [even] num:11, alphabet:8, sp:1  # TODO hard to understand
+        def test_verify_passwd_num_less_than_half_of_length(self, length):
+            assert not verify_passwd(create_passwd(incl_str='!12', length=length, incl_sp_char=False))
+
+        @pytest.mark.parametrize('length', [21])  # [odd] num:11, alphabet:9, sp:1  # TODO hard to understand
+        def test_verify_passwd_num_less_than_half_of_length(self, length):
+            assert not verify_passwd(create_passwd(incl_str='!12', length=length, incl_sp_char=False))

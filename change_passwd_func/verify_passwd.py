@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 from change_passwd_func.constants import (
-    SP_CHARS,
-    MIN_VALID_LENGTH,
     MAX_CHAR_CONTINUOUS_NUM,
-    MAX_SP_CHAR_NUM
+    MAX_SP_CHAR_NUM,
+    MIN_VALID_LENGTH,
+    SP_CHARS
 )
 
 
@@ -20,10 +20,10 @@ def verify_passwd(passwd):
         print("didn't include all necessary patterns")
         return False
     elif _include_over_continuous_same_chars(passwd):
-        print('included continous 4 same chars')
+        print('included continous more thna {} same chars'.format(MAX_CHAR_CONTINUOUS_NUM))
         return False
     elif _include_over_sp_char_num(passwd):
-        print('included more than 4 special characters')
+        print('included more than {} special characters'.format(MAX_SP_CHAR_NUM))
         return False
     elif _include_num_more_than_half_of_length(passwd):
         print('50 % of password should not be a number')
