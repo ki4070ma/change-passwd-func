@@ -8,6 +8,12 @@ $ cd /path/to/change_passwd_func
 $ py.test
 ```
 
+## Test design and Test cases
+
+### Verify password
+* https://docs.google.com/spreadsheets/d/1Gq1EUD5i_Ko0uE9PCUINHnwNm5oDvesw5OMNhHfZT14/edit?usp=sharing
+
+
 # Objective
 We want you to create a change password function based on below specification.
 This change password function will just return True or False back to function caller to inform the caller

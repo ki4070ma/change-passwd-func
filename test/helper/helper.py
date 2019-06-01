@@ -4,24 +4,25 @@ from change_passwd_func.constants import MIN_VALID_LENGTH, SP_CHARS
 
 VALID_PASSWD_BASE = '1aB2'
 
+INVALID_CHAR = '-'
 
-def create_passwd(incl_str='', length=MIN_VALID_LENGTH, padding_src_str=VALID_PASSWD_BASE, incl_sp_char=True):
-    '''Generate password
 
-    Args:
-        incl_str(str): Strings added to the HEAD of password. Default is empty str.
-        length(int): Length for passwords. Default is `MIN_VALID_LENGTH`
-        padding_src_str(str): Strings used for password padding.
-            Strings used repeatedly until filling `length`. Default is `VALID_PASSWD_BASE`
-        incl_sp_char(bool): Add special char to teh TAIL of password or not.
-            Need at least one special char for valid password. Default is True
-
-    Returns:
-        str: Genrated password
-    '''
-    l = len(padding_src_str)
-    for i in range(length-len(incl_str)):
-        incl_str += padding_src_str[i % l]
+def pswd_generator(
+        password='',
+        length=MIN_VALID_LENGTH,
+        incl_invalid_char=False,
+        incl_upper_char=True,
+        incl_lower_char=True,
+        incl_num=True,
+        incl_sp_char=True):
+    base_strings = ''
+    base_strings += 'A' if incl_upper_char else ''
+    base_strings += 'b' if incl_lower_char else ''
+    base_strings += '1'*len(base_strings) if incl_num else ''
+    for i in range(length-len(password)):
+        password += base_strings[i % len(base_strings)]
     if incl_sp_char:
-        incl_str = incl_str[:-1] + SP_CHARS[0]
-    return incl_str
+        password = password[:-1] + SP_CHARS[0]
+    if incl_invalid_char:
+        password = password[:-2] + INVALID_CHAR + password[-1]
+    return password

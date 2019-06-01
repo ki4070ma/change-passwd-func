@@ -85,7 +85,7 @@ def _include_num_more_than_half_of_length(passwd):
     for c in passwd:
         if c.isnumeric():
             count += 1
-    return count > len(passwd) / 2.0
+    return count >= len(passwd) / 2.0
 
 
 if __name__ == '__main__':
