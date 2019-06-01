@@ -1,4 +1,11 @@
 # Assignment
+
+## Add password requirement
+1. At least 18 alphanumeric characters and list of special chars !@#$&*
+   * [Add] Maximum length is 1000.
+      * Because 1000 is enough as password and wouldn't like not to take care of large length like `sys.maxsize` from quality point of view. Too large size may impact to system like performance wise.
+
+
 ## How to run test
 
 ```
@@ -7,6 +14,12 @@ $ pip install pytest
 $ cd /path/to/change_passwd_func
 $ py.test
 ```
+
+## Test design and Test cases
+
+### Verify password
+* https://docs.google.com/spreadsheets/d/1Gq1EUD5i_Ko0uE9PCUINHnwNm5oDvesw5OMNhHfZT14/edit?usp=sharing
+
 
 # Objective
 We want you to create a change password function based on below specification.

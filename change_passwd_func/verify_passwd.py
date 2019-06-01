@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
+import re
+
 from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,
     MAX_SP_CHAR_NUM,
+    MAX_VALID_LENGTH,
     MIN_VALID_LENGTH,
     SP_CHARS
 )
@@ -10,7 +13,7 @@ from .constants import (
 
 def verify_passwd(passwd):
     print('[passwd]: {}'.format(passwd))
-    if len(passwd) < MIN_VALID_LENGTH:
+    if len(passwd) < MIN_VALID_LENGTH or len(passwd) > MAX_VALID_LENGTH:
         print('Length {} is not enough. Needs to be at least {}'.format(len(passwd), MIN_VALID_LENGTH))
         return False
     elif _include_invalid_char(passwd):
@@ -34,7 +37,7 @@ def verify_passwd(passwd):
 
 def _include_invalid_char(passwd):
     for x in passwd:
-        if not x.isalnum() and x not in SP_CHARS:
+        if not bool(re.search('[0-9a-zA-Z]', x)) and x not in SP_CHARS:  # x.isalnum() unavailable for Hiragana, Kanji, etc
             return True
     return False
 
@@ -85,7 +88,7 @@ def _include_num_more_than_half_of_length(passwd):
     for c in passwd:
         if c.isnumeric():
             count += 1
-    return count > len(passwd) / 2.0
+    return count >= len(passwd) / 2.0
 
 
 if __name__ == '__main__':
