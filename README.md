@@ -1,11 +1,11 @@
-# ASSIGNMENT
-## HOW TO RUN TEST
+# Assignment
+## How to run test
 
 ```
 (setup python environment. eihter py2 or py3)
-pip install pytest
-cd /path/to/change_passwd_func
-py.test
+$ pip install pytest
+$ cd /path/to/change_passwd_func
+$ py.test
 ```
 
 # Objective
