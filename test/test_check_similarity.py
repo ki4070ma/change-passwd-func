@@ -32,17 +32,32 @@ class TestCheckSimilarity(object):
 
         length = 100
 
-        def test_check_passwd_not_similar_79_percent(self):
+        def test_check_passwd_not_similar_79_percent_new_pswd_longer(self):
             str1 = 'a'*int(self.length*SIMILARITY_THRESHOLD-1)
             str2 = 'a'*self.length
             assert not check_similarity(str1, str2)
 
-        def test_check_passwd_not_similar_80_percent(self):
+        def test_check_passwd_not_similar_80_percent_new_pswd_longer(self):
             str1 = 'a'*int(self.length*SIMILARITY_THRESHOLD)
             str2 = 'a'*self.length
             assert not check_similarity(str1, str2)
 
-        def test_check_passwd_not_similar_81_percent(self):
+        def test_check_passwd_not_similar_81_percent_new_pswd_longer(self):
             str1 = 'a'*int(self.length*SIMILARITY_THRESHOLD+1)
             str2 = 'a'*self.length
+            assert check_similarity(str1, str2)
+
+        def test_check_passwd_not_similar_79_percent_old_pswd_longer(self):
+            str1 = 'a'*self.length
+            str2 = 'a'*int(self.length*SIMILARITY_THRESHOLD-1)
+            assert not check_similarity(str1, str2)
+
+        def test_check_passwd_not_similar_80_percent_old_pswd_longer(self):
+            str1 = 'a'*self.length
+            str2 = 'a'*int(self.length*SIMILARITY_THRESHOLD)
+            assert not check_similarity(str1, str2)
+
+        def test_check_passwd_not_similar_81_percent_old_pswd_longer(self):
+            str1 = 'a'*self.length
+            str2 = 'a'*int(self.length*SIMILARITY_THRESHOLD+1)
             assert check_similarity(str1, str2)
