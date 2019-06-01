@@ -2,6 +2,7 @@
 
 from change_passwd_func.check_similarity import check_similarity
 
+
 class TestCheckSimilarity(object):
 
     def test_check_passwd_not_similar_90_percent(self):
@@ -18,4 +19,3 @@ class TestCheckSimilarity(object):
         str1 = 'abcdefghij'
         str2 = 'abcdefg123'
         assert not check_similarity(str1, str2)
-
