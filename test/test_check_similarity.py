@@ -8,7 +8,7 @@ from change_passwd_func.constants import SIMILARITY_THRESHOLD
 
 class TestCheckSimilarity(object):
 
-    class TestCheckSimilaritySameTailString(object):
+    class TestCheckSimilaritySameLengthMatchTailString(object):
 
         LENGTH = 100
 
@@ -53,7 +53,7 @@ class TestCheckSimilarity(object):
             str2 = 'o'*self.LENGTH
             return check_similarity(str1, str2)
 
-    class TestCheckSimilaritySameCenterString(object):
+    class TestCheckSimilaritySameLengthMatchCenterString(object):
 
         LENGTH = 100
 
@@ -99,7 +99,7 @@ class TestCheckSimilarity(object):
             return check_similarity(str1, str2)
 
 
-    class TestCheckSimilaritySameHeadStringLength(object):
+    class TestCheckSimilaritySameLengthMatchHeadString(object):
 
         LENGTH = 100
 
@@ -144,15 +144,68 @@ class TestCheckSimilarity(object):
             str2 = 'o'*self.LENGTH
             return check_similarity(str1, str2)
 
+    class TestCheckSimilaritySameLengthMixedMatchStrings(object):
+
+        LENGTH = 100
+
+        # TestIdx: 10, 11
+        @pytest.mark.parametrize('str_diff_num', [-1, 0])  # 79%/80% matching
+        def test_check_similarity_not_similar(self, str_diff_num):
+            assert not self._check_similarity_matched_char_mixed(str_diff_num)
+
+        # TestIdx: 12
+        @pytest.mark.parametrize('str_diff_num', [1])  # 81% matching
+        def test_check_similarity_similar(self, str_diff_num):
+            assert self._check_similarity_matched_char_mixed(str_diff_num)
+
+        def _check_similarity_matched_char_mixed(self, str_diff_num):
+            '''Check similarity between two strings with `str_diff_num`.
+
+            One string has difference which is timed by `SIMILARITY_THRESHOLD`
+            and added `str_diff_num`.
+            Matched strings are within strings.
+
+            Example:
+                `SIMILARITY_THRESHOLD` is 0.8.
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+                    str1: oXoXoXoooo
+                    str2: oooooooooo
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+                    str1: oXoXoooooo
+                    str2: oooooooooo
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+                    str1: oXoooooooo
+                    str2: oooooooooo
+
+            Args:
+                str_diff_num(int): additional the number of string difference
+
+            Returns:
+                bool: `check_similarity` result
+            '''
+
+            len1 = int(self.LENGTH * SIMILARITY_THRESHOLD + str_diff_num)
+            char_list = ['o']*self.LENGTH
+            for i in range(self.LENGTH - len1):
+                if char_list[2*i+1] != 'o':
+                    char_list[2*i+1] = 'X'
+                else:
+                    char_list[2*i] = 'X'
+            str1 = ''.join(char_list)
+            str2 = 'o'*self.LENGTH
+            return check_similarity(str1, str2)
+
 
     class TestCheckSimilarityDifferentStringLength(object):
 
         LENGTH = 100
 
+        # TestIdx: 13, 14
         @pytest.mark.parametrize('str_diff_num', [-1, 0])
         def test_check_similarity_not_similar_dest_string_longer(self, str_diff_num):  # 79%/80% matching
             assert not self._check_similarity_dest_str_longer(str_diff_num)
 
+        # TestIdx: 15
         @pytest.mark.parametrize('str_diff_num', [1])
         def test_check_similarity_similar_dest_string_longer(self, str_diff_num):  # 81% matching
             assert self._check_similarity_dest_str_longer(str_diff_num)
@@ -187,10 +240,12 @@ class TestCheckSimilarity(object):
             len2 = self.LENGTH
             return self._check_similarity(len1, len2)
 
+        # TestIdx: 16, 17
         @pytest.mark.parametrize('str_diff_num', [-1, 0])
         def test_check_similarity_not_similar_src_string_longer(self, str_diff_num):  # 79%/80% matching
             assert not self._check_similarity_src_string_longer(str_diff_num)
 
+        # TestIdx: 18
         @pytest.mark.parametrize('str_diff_num', [1])
         def test_check_similarity_similar_src_string_longer(self, str_diff_num):  # 81% matching
             assert self._check_similarity_src_string_longer(str_diff_num)
