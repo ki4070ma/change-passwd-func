@@ -8,7 +8,55 @@ from change_passwd_func.constants import SIMILARITY_THRESHOLD
 
 class TestCheckSimilarity(object):
 
-    class TestCheckSimilaritySameStringLength(object):
+    class TestCheckSimilaritySameTailStringLength(object):
+
+        LENGTH = 100
+
+        # TestIdx: 1, 2
+        @pytest.mark.parametrize('str_diff_num', [-1, 0])  # 79%/80% matching
+        def test_check_similarity_not_similar_src_dist_same_length(self, str_diff_num):
+            assert not self._check_similarity_same_tail(str_diff_num)
+
+        # TestIdx: 3
+        @pytest.mark.parametrize('str_diff_num', [1])  # 81% matching
+        def test_check_similarity_similar_src_dist_same_length(self, str_diff_num):
+            assert self._check_similarity_same_tail(str_diff_num)
+
+        def _check_similarity_same_tail(self, str_diff_num):
+            '''Check similarity between two strings with `str_diff_num`.
+
+            One string has difference which is timed by `SIMILARITY_THRESHOLD`
+            and added `str_diff_num`.
+            Two strings has the same strings at TAIL.
+
+            Example:
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+                `SIMILARITY_THRESHOLD` is 0.8.
+                    str1: bbbaaaaaaa
+                    str2: aaaaaaaaaa
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+                `SIMILARITY_THRESHOLD` is 0.8.
+                    str1: bbaaaaaaaa
+                    str2: aaaaaaaaaa
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+                `SIMILARITY_THRESHOLD` is 0.8.
+                    str1: baaaaaaaaa
+                    str2: aaaaaaaaaa
+
+            Args:
+                str_diff_num(int): additional the number of string difference
+
+            Returns:
+                bool: `check_similarity` result
+            '''
+
+            len1 = int(self.LENGTH * SIMILARITY_THRESHOLD + str_diff_num)
+            str1 = '{}{}'.format('b'*(self.LENGTH - len1), 'a'*len1)
+            str2 = 'a'*self.LENGTH
+            return check_similarity(str1, str2)
+
+
+    class TestCheckSimilaritySameHeadStringLength(object):
 
         LENGTH = 100
 
@@ -23,15 +71,28 @@ class TestCheckSimilarity(object):
             assert self._check_similarity_same_head(str_diff_num)
 
         def _check_similarity_same_head(self, str_diff_num):
-            '''
+            '''Check similarity between two strings with `str_diff_num`.
+
+            One string has difference which is timed by `SIMILARITY_THRESHOLD`
+            and added `str_diff_num`.
+            Two strings has the same strings at HEAD.
 
             Example:
-                Below strings will be compared with `LENGTH`:10, `str_diff_num`:3
-                str1: aaaaaaabbb
-                str2: aaaaaaaaaa
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+                `SIMILARITY_THRESHOLD` is 0.8.
+                    str1: aaaaaaabbb
+                    str2: aaaaaaaaaa
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+                `SIMILARITY_THRESHOLD` is 0.8.
+                    str1: aaaaaaaabb
+                    str2: aaaaaaaaaa
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+                `SIMILARITY_THRESHOLD` is 0.8.
+                    str1: aaaaaaaaab
+                    str2: aaaaaaaaaa
 
             Args:
-                str_diff_num:
+                str_diff_num(int): additional the number of string difference
 
             Returns:
                 bool: `check_similarity` result
@@ -41,7 +102,6 @@ class TestCheckSimilarity(object):
             str1 = '{}{}'.format('a'*len1, 'b'*(self.LENGTH - len1))
             str2 = 'a'*self.LENGTH
             return check_similarity(str1, str2)
-
 
 
     class TestCheckSimilarityDifferentStringLength(object):
