@@ -2,12 +2,8 @@
 
 from change_passwd_func.constants import MIN_VALID_LENGTH, SP_CHARS
 
-VALID_PASSWD_BASE = '1aB2'
 
-INVALID_CHAR = '-'
-
-
-def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH, incl_invalid_char=False,
+def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH,
                    incl_upper_char=True, incl_lower_char=True, incl_num=True, incl_sp_char=True):
     '''Generate password
 
@@ -21,8 +17,6 @@ def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH, incl_invalid_char=Fals
     Args:
         pswd_base(str): Used string at the HEAD of password
         length(int): Password length in total
-        incl_invalid_char(bool): Flag to include invalid char.
-            If True, added 1 invalid char to the last 2nd
         incl_upper_char(bool): Flag to include upper char in password.
             If True, added 1 upper char to `base_strings`
         incl_lower_char(bool): Flag to include lower char in password.
@@ -44,6 +38,4 @@ def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH, incl_invalid_char=Fals
         pswd_base += base_strings[i % len(base_strings)]
     if incl_sp_char:
         pswd_base = pswd_base[:-1] + SP_CHARS[0]
-    if incl_invalid_char:
-        pswd_base = pswd_base[:-2] + INVALID_CHAR + pswd_base[-1]
     return pswd_base
