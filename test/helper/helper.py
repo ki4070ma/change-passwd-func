@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-from change_passwd_func.constants import MIN_VALID_LENGTH, SP_CHARS
+from change_passwd_func.constants import (
+    MIN_VALID_LENGTH,
+    SIMILARITY_THRESHOLD,
+    SP_CHARS
+)
 
 
 def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH,
@@ -39,3 +43,198 @@ def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH,
     if incl_sp_char:
         pswd_base = pswd_base[:-1] + SP_CHARS[0]
     return pswd_base
+
+
+def strings_generator_same_tail(str_diff_num, length=100):
+    '''Check similarity between two strings with `str_diff_num`.
+
+    One string has difference which is timed by `SIMILARITY_THRESHOLD`
+    and added `str_diff_num`.
+    Two strings has the same strings at TAIL.
+
+    Example:
+        `SIMILARITY_THRESHOLD` is 0.8.
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+            str1: XXXooooooo
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+            str1: XXoooooooo
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+            str1: Xooooooooo
+            str2: oooooooooo
+
+    Args:
+        str_diff_num(int): additional the number of string difference
+
+    Returns:
+        str, str: Generated two strings
+    '''
+
+    len1 = int(length*SIMILARITY_THRESHOLD + str_diff_num)
+    str1 = '{}{}'.format('X' * (length - len1), 'o' * len1)
+    str2 = 'o' * length
+    return str1, str2
+
+
+def strings_generator_same_center(str_diff_num, length=100):
+    '''Check similarity between two strings with `str_diff_num`.
+
+    One string has difference which is timed by `SIMILARITY_THRESHOLD`
+    and added `str_diff_num`.
+    Two strings has the same strings at CENTER.
+
+    Example:
+        `SIMILARITY_THRESHOLD` is 0.8.
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+            str1: ooooXXXooo
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+            str1: ooooXXoooo
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+            str1: ooooXooooo
+            str2: oooooooooo
+
+    Args:
+        str_diff_num(int): additional the number of string difference
+
+    Returns:
+        str, str: Generated two strings
+    '''
+
+    len1 = int(length * SIMILARITY_THRESHOLD + str_diff_num)
+    str1 = '{}{}{}'.format('o' * int(len1 / 2), 'X' * (length - len1), 'o' * (len1 - int(len1 / 2)))
+    str2 = 'o' * length
+    return str1, str2
+
+
+def strings_generator_same_head(str_diff_num, length=100):
+    '''Check similarity between two strings with `str_diff_num`.
+
+    One string has difference which is timed by `SIMILARITY_THRESHOLD`
+    and added `str_diff_num`.
+    Two strings has the same strings at HEAD.
+
+    Example:
+        `SIMILARITY_THRESHOLD` is 0.8.
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+            str1: oooooooXXX
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+            str1: ooooooooXX
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+            str1: oooooooooX
+            str2: oooooooooo
+
+    Args:
+        str_diff_num(int): additional the number of string difference
+
+    Returns:
+        str, str: Generated two strings
+    '''
+
+    len1 = int(length * SIMILARITY_THRESHOLD + str_diff_num)
+    str1 = '{}{}'.format('o' * len1, 'X' * (length - len1))
+    str2 = 'o' * length
+    return str1, str2
+
+
+def strings_generator_matched_char_mixed(str_diff_num, length=100):
+    '''Check similarity between two strings with `str_diff_num`.
+
+    One string has difference which is timed by `SIMILARITY_THRESHOLD`
+    and added `str_diff_num`.
+    Matched strings are within strings.
+
+    Example:
+        `SIMILARITY_THRESHOLD` is 0.8.
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+            str1: oXoXoXoooo
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+            str1: oXoXoooooo
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+            str1: oXoooooooo
+            str2: oooooooooo
+
+    Args:
+        str_diff_num(int): additional the number of string difference
+
+    Returns:
+        str, str: Generated two strings
+    '''
+
+    len1 = int(length * SIMILARITY_THRESHOLD + str_diff_num)
+    char_list = ['o'] * length
+    for i in range(length - len1):
+        if char_list[2 * i + 1] != 'o':
+            char_list[2 * i + 1] = 'X'
+        else:
+            char_list[2 * i] = 'X'
+    str1 = ''.join(char_list)
+    str2 = 'o' * length
+    return str1, str2
+
+
+def strings_generator_dest_str_longer(str_diff_num, length=100):
+    '''Check similarity between two strings with `str_diff_num`.
+
+    One string has difference which is timed by `SIMILARITY_THRESHOLD`
+    and added `str_diff_num`.
+    Destination string is longer than source string.
+
+    Example:
+        `SIMILARITY_THRESHOLD` is 0.8.
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+            str1: ooooooo
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+            str1: oooooooo
+            str2: oooooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+            str1: ooooooooo
+            str2: oooooooooo
+
+    Args:
+        str_diff_num(int): additional the number of string difference
+
+    Returns:
+        str, str: Generated two strings
+    '''
+
+    str1 = 'o'*int(length * SIMILARITY_THRESHOLD + str_diff_num)
+    str2 = 'o'*length
+    return str1, str2
+
+
+def strings_generator_src_string_longer(str_diff_num, length=100):
+    '''Check similarity between two strings with `str_diff_num`.
+
+    One string has difference which is timed by `SIMILARITY_THRESHOLD`
+    and added `str_diff_num`.
+    Destination string is longer than source string.
+
+    Example:
+        `SIMILARITY_THRESHOLD` is 0.8.
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+            str1: oooooooooo
+            str2: ooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+            str1: oooooooooo
+            str2: oooooooo
+        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+            str1: oooooooooo
+            str2: ooooooooo
+
+    Args:
+        str_diff_num(int): additional the number of string difference
+
+    Returns:
+        bool: `check_similarity` result
+    '''
+    str1 = 'o'*length
+    str2 = 'o'*int(length * SIMILARITY_THRESHOLD + str_diff_num)
+    return str1, str2
