@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
 from .constants import (
-    MIN_VALID_LENGTH,
-    MAX_VALID_LENGTH,
     MAX_CHAR_CONTINUOUS_NUM,
-    MAX_SP_CHAR_NUM
+    MAX_SP_CHAR_NUM,
+    MAX_VALID_LENGTH,
+    MIN_VALID_LENGTH
 )
+
 
 class ErrorMsg(object):
 

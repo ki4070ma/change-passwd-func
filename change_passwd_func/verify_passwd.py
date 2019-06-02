@@ -2,7 +2,6 @@
 
 import re
 
-from .error_msg import ErrorMsg
 from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,
     MAX_SP_CHAR_NUM,
@@ -10,6 +9,7 @@ from .constants import (
     MIN_VALID_LENGTH,
     SP_CHARS
 )
+from .error_msg import ErrorMsg
 
 
 def verify_passwd(passwd):
@@ -90,4 +90,5 @@ def _include_num_more_than_half_of_length(passwd):
 
 
 if __name__ == '__main__':
-    pass
+    passwd = 'Abcdefghijkl1234567!'
+    print('passwd: {}, valid passwd: {}'.format(passwd, verify_passwd(passwd)))
