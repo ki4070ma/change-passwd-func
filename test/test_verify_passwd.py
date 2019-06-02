@@ -37,7 +37,6 @@ class TestVerifyPasswd(object):
         def test_verify_passwd_over_valid_length(self, length):
             assert not verify_passwd(pswd_generator(length=length))
 
-
     class TestVerifyPasswdInvalidChar(object):
         # TestIdx: 6
         @pytest.mark.parametrize('invalid_char', ['-', 'あ', '^', '朝', 'ไทย', 'Ａ'])
