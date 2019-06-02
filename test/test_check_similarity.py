@@ -12,19 +12,37 @@ class TestCheckSimilarity(object):
 
         LENGTH = 100
 
+        # TestIdx: 7, 8
         @pytest.mark.parametrize('str_diff_num', [-1, 0])  # 79%/80% matching
         def test_check_similarity_not_similar_src_dist_same_length(self, str_diff_num):
-            assert not self._check_similarity(str_diff_num)
+            assert not self._check_similarity_same_head(str_diff_num)
 
+        # TestIdx: 9
         @pytest.mark.parametrize('str_diff_num', [1])  # 81% matching
         def test_check_similarity_similar_src_dist_same_length(self, str_diff_num):
-            assert self._check_similarity(str_diff_num)
+            assert self._check_similarity_same_head(str_diff_num)
 
-        def _check_similarity(self, str_diff_num):
+        def _check_similarity_same_head(self, str_diff_num):
+            '''
+
+            Example:
+                Below strings will be compared with `LENGTH`:10, `str_diff_num`:3
+                str1: aaaaaaabbb
+                str2: aaaaaaaaaa
+
+            Args:
+                str_diff_num:
+
+            Returns:
+                bool: `check_similarity` result
+            '''
+
             len1 = int(self.LENGTH * SIMILARITY_THRESHOLD + str_diff_num)
             str1 = '{}{}'.format('a'*len1, 'b'*(self.LENGTH - len1))
             str2 = 'a'*self.LENGTH
             return check_similarity(str1, str2)
+
+
 
     class TestCheckSimilarityDifferentStringLength(object):
 
