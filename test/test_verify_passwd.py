@@ -51,15 +51,18 @@ class TestVerifyPasswd(object):
 
     class TestVerifyPasswdUpperChar(object):
         # TestIdx: 8
-        pass
+        def test_verify_passwd_no_upper_char(self):
+            assert not verify_passwd(pswd_generator(incl_upper_char=False))
 
     class TestVerifyPasswdLowerChar(object):
         # TestIdx: 9
-        pass
+        def test_verify_passwd_no_lower_char(self):
+            assert not verify_passwd(pswd_generator(incl_lower_char=False))
 
     class TestVerifyPasswdNumericChar(object):
         # TestIdx: 10
-        pass
+        def test_verify_passwd_no_numeric(self):
+            assert not verify_passwd(pswd_generator(incl_num=False))
 
     class TestVerifyPassowdContinuousSameChar(object):
         # TestIdx: 11, 12
