@@ -13,50 +13,48 @@ class TestCheckSimilarity(object):
         LENGTH = 100
 
         @pytest.mark.parametrize('str_diff_num', [-1, 0])  # 79%/80% matching
-        def test_check_passwd_not_similar(self, str_diff_num):
-            assert not self._test_check_passwd(str_diff_num)
+        def test_check_similarity_not_similar_src_dist_same_length(self, str_diff_num):
+            assert not self._check_similarity(str_diff_num)
 
         @pytest.mark.parametrize('str_diff_num', [1])  # 81% matching
-        def test_check_passwd_similar(self, str_diff_num):
-            assert self._test_check_passwd(str_diff_num)
+        def test_check_similarity_similar_src_dist_same_length(self, str_diff_num):
+            assert self._check_similarity(str_diff_num)
 
-        def _test_check_passwd(self, str_diff_num):
+        def _check_similarity(self, str_diff_num):
             len1 = int(self.LENGTH * SIMILARITY_THRESHOLD + str_diff_num)
-            str1 = '{}{}'.format('a' * len1, 'b' * (self.LENGTH - len1))
+            str1 = '{}{}'.format('a'*len1, 'b'*(self.LENGTH - len1))
             str2 = 'a'*self.LENGTH
             return check_similarity(str1, str2)
-
 
     class TestCheckSimilarityDifferentStringLength(object):
 
         LENGTH = 100
 
-        def test_check_passwd_not_similar_new_pswd_longer(self):  # 79% matching
-            str1 = 'a'*int(self.LENGTH * SIMILARITY_THRESHOLD - 1)
-            str2 = 'a'*self.LENGTH
-            assert not check_similarity(str1, str2)
+        @pytest.mark.parametrize('str_diff_num', [-1, 0])
+        def test_check_similarity_not_similar_dist_string_longer(self, str_diff_num):  # 79%/80% matching
+            assert not self._check_similarity_dist_psswd_longer(str_diff_num)
 
-        def test_check_passwd_not_similar_new_pswd_longer_on_SIMILARITY_THRESHOLD(self):  # 80% matching
-            str1 = 'a'*int(self.LENGTH * SIMILARITY_THRESHOLD)
-            str2 = 'a'*self.LENGTH
-            assert not check_similarity(str1, str2)
+        @pytest.mark.parametrize('str_diff_num', [1])
+        def test_check_similarity_similar_dist_string_longer(self, str_diff_num):  # 81% matching
+            assert self._check_similarity_dist_psswd_longer(str_diff_num)
 
-        def test_check_passwd_similar_new_pswd_longer(self):  # 81% matching
-            str1 = 'a'*int(self.LENGTH * SIMILARITY_THRESHOLD + 1)
-            str2 = 'a'*self.LENGTH
-            assert check_similarity(str1, str2)
+        def _check_similarity_dist_psswd_longer(self, str_diff_num):
+            len1 = int(self.LENGTH*SIMILARITY_THRESHOLD + str_diff_num)
+            len2 = self.LENGTH
+            return self._check_similarity(len1, len2)
 
-        def test_check_passwd_not_similar_old_pswd_longer(self):  # 79% matching
-            str1 = 'a'*self.LENGTH
-            str2 = 'a'*int(self.LENGTH * SIMILARITY_THRESHOLD - 1)
-            assert not check_similarity(str1, str2)
+        @pytest.mark.parametrize('str_diff_num', [-1, 0])
+        def test_check_similarity_not_similar_src_string_longer(self, str_diff_num):  # 79%/80% matching
+            assert not self._check_similarity_src_string_longer(str_diff_num)
 
-        def test_check_passwd_not_similar_old_pswd_longer_on_SIMILARITY_THRESHOLD(self):  # 80% matching
-            str1 = 'a'*self.LENGTH
-            str2 = 'a'*int(self.LENGTH * SIMILARITY_THRESHOLD)
-            assert not check_similarity(str1, str2)
+        @pytest.mark.parametrize('str_diff_num', [1])
+        def test_check_similarity_similar_src_string_longer(self, str_diff_num):  # 81% matching
+            assert self._check_similarity_src_string_longer(str_diff_num)
 
-        def test_check_passwd_similar_old_pswd_longer(self):  # 81% matching
-            str1 = 'a'*self.LENGTH
-            str2 = 'a'*int(self.LENGTH * SIMILARITY_THRESHOLD + 1)
-            assert check_similarity(str1, str2)
+        def _check_similarity_src_string_longer(self, str_diff_num):
+            len1 = self.LENGTH
+            len2 = int(self.LENGTH*SIMILARITY_THRESHOLD + str_diff_num)
+            return self._check_similarity(len1, len2)
+
+        def _check_similarity(self, len1, len2):
+            return check_similarity('a'*len1, 'a'*len2)

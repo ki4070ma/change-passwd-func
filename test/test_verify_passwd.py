@@ -28,7 +28,7 @@ class TestVerifyPasswd(object):
             assert not verify_passwd(pswd_generator(length=length))
 
         # TestIdx: 3, 4
-        @pytest.mark.parametrize('length', [MIN_VALID_LENGTH, MIN_VALID_LENGTH+1, MAX_VALID_LENGTH])
+        @pytest.mark.parametrize('length', [MIN_VALID_LENGTH, MIN_VALID_LENGTH + 1, MAX_VALID_LENGTH])
         def test_verify_passwd_valid_length_18(self, length):
             assert verify_passwd(pswd_generator(length=length))
 
