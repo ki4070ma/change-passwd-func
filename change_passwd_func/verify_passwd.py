@@ -2,6 +2,7 @@
 
 import re
 
+from .error_msg import ErrorMsg
 from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,
     MAX_SP_CHAR_NUM,
@@ -14,25 +15,22 @@ from .constants import (
 def verify_passwd(passwd):
     print('[passwd]: {}'.format(passwd))
     if len(passwd) < MIN_VALID_LENGTH or len(passwd) > MAX_VALID_LENGTH:
-        print('Length {} is not enough. Needs to be at least {}'.format(len(passwd), MIN_VALID_LENGTH))
-        return False
+        print('Password length is {}.'.format(len(passwd)))
+        print(ErrorMsg.INVALID_LENGTH)
     elif _include_invalid_char(passwd):
-        print('included invalid char')
-        return False
+        print(ErrorMsg.INVALID_CHAR)
     elif _include_not_all_patterns(passwd):
-        print("didn't include all necessary patterns")
-        return False
+        print(ErrorMsg.NOT_ALL_PATTERNS)
     elif _include_over_continuous_same_chars(passwd):
-        print('included continous more thna {} same chars'.format(MAX_CHAR_CONTINUOUS_NUM))
-        return False
+        print(ErrorMsg.OVER_CONTINUOUS_SAME_CHARS)
     elif _include_over_sp_char_num(passwd):
-        print('included more than {} special characters'.format(MAX_SP_CHAR_NUM))
-        return False
+        print(ErrorMsg.OVER_SP_CHAR_NUM)
     elif _include_num_more_than_half_of_length(passwd):
-        print('50 % of password should not be a number')
-        return False
-    print('Valid passwd')
-    return True
+        print(ErrorMsg.MORE_THAN_HALF_OF_LENGTH)
+    else:
+        print('Valid passwd')
+        return True
+    return False
 
 
 def _include_invalid_char(passwd):
