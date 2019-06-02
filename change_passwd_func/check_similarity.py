@@ -6,6 +6,12 @@ from .constants import SIMILARITY_THRESHOLD
 
 
 def check_similarity(string1, string2):
+    '''
+
+    Considered that strings1/2 has alphabet or numeric or special chars(`constants.SP_CHARS`)
+
+    '''
+
     print('')
     print('string1: {}'.format(string1))
     print('string2: {}'.format(string2))
