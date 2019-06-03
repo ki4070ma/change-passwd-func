@@ -54,13 +54,13 @@ def strings_generator_same_tail(str_diff_num, length=100):
 
     Example:
         `SIMILARITY_THRESHOLD` is 0.8.
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 1
             str1: XXXooooooo
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 0
             str1: XXoooooooo
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: -1
             str1: Xooooooooo
             str2: oooooooooo
 
@@ -82,17 +82,17 @@ def strings_generator_same_center(str_diff_num, length=100):
 
     One string has difference which is timed by `SIMILARITY_THRESHOLD`
     and added `str_diff_num`.
-    Two strings has the same strings at CENTER.
+    Two strings has the different strings at CENTER.
 
     Example:
         `SIMILARITY_THRESHOLD` is 0.8.
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 1
             str1: ooooXXXooo
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 0
             str1: ooooXXoooo
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: -1
             str1: ooooXooooo
             str2: oooooooooo
 
@@ -118,13 +118,13 @@ def strings_generator_same_head(str_diff_num, length=100):
 
     Example:
         `SIMILARITY_THRESHOLD` is 0.8.
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 1
             str1: oooooooXXX
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 0
             str1: ooooooooXX
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: -1
             str1: oooooooooX
             str2: oooooooooo
 
@@ -150,13 +150,13 @@ def strings_generator_matched_char_mixed(str_diff_num, length=100):
 
     Example:
         `SIMILARITY_THRESHOLD` is 0.8.
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 1
             str1: oXoXoXoooo
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 0
             str1: oXoXoooooo
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: -1
             str1: oXoooooooo
             str2: oooooooooo
 
@@ -188,13 +188,13 @@ def strings_generator_dest_str_longer(str_diff_num, length=100):
 
     Example:
         `SIMILARITY_THRESHOLD` is 0.8.
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 1
             str1: ooooooo
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 0
             str1: oooooooo
             str2: oooooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: -1
             str1: ooooooooo
             str2: oooooooooo
 
@@ -219,13 +219,13 @@ def strings_generator_src_string_longer(str_diff_num, length=100):
 
     Example:
         `SIMILARITY_THRESHOLD` is 0.8.
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 1
             str1: oooooooooo
             str2: ooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: 0
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: 0
             str1: oooooooooo
             str2: oooooooo
-        Below strings will be compared with `LENGTH`:10, `str_diff_num`: -1
+        Below strings will be returned with `LENGTH`:10, `str_diff_num`: -1
             str1: oooooooooo
             str2: ooooooooo
 
@@ -233,7 +233,7 @@ def strings_generator_src_string_longer(str_diff_num, length=100):
         str_diff_num(int): additional the number of string difference
 
     Returns:
-        bool: `check_similarity` result
+        str, str: Generated two strings
     '''
     str1 = 'o'*length
     str2 = 'o'*int(length * SIMILARITY_THRESHOLD + str_diff_num)
