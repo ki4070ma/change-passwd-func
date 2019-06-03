@@ -9,24 +9,24 @@ from .constants import (
     MIN_VALID_LENGTH,
     SP_CHARS
 )
-from .error_msg import ErrorMsg
+from .error_msg import ErrorMsgVerifyPswd
 
 
 def verify_passwd(passwd):
-    print('[passwd]: {}'.format(passwd))
+    print('\n[passwd]: {}'.format(passwd))
     if len(passwd) < MIN_VALID_LENGTH or len(passwd) > MAX_VALID_LENGTH:
         print('Password length is {}.'.format(len(passwd)))
-        print(ErrorMsg.INVALID_LENGTH)
+        print(ErrorMsgVerifyPswd.INVALID_LENGTH)
     elif _include_invalid_char(passwd):
-        print(ErrorMsg.INVALID_CHAR)
+        print(ErrorMsgVerifyPswd.INVALID_CHAR)
     elif _include_not_all_patterns(passwd):
-        print(ErrorMsg.NOT_ALL_PATTERNS)
+        print(ErrorMsgVerifyPswd.NOT_ALL_PATTERNS)
     elif _include_over_continuous_same_chars(passwd):
-        print(ErrorMsg.OVER_CONTINUOUS_SAME_CHARS)
+        print(ErrorMsgVerifyPswd.OVER_CONTINUOUS_SAME_CHARS)
     elif _include_over_sp_char_num(passwd):
-        print(ErrorMsg.OVER_SP_CHAR_NUM)
+        print(ErrorMsgVerifyPswd.OVER_SP_CHAR_NUM)
     elif _include_num_more_than_half_of_length(passwd):
-        print(ErrorMsg.MORE_THAN_HALF_OF_LENGTH)
+        print(ErrorMsgVerifyPswd.MORE_THAN_HALF_OF_LENGTH)
     else:
         print('Valid passwd')
         return True
@@ -87,8 +87,3 @@ def _include_num_more_than_half_of_length(passwd):
         if c.isnumeric():
             count += 1
     return count >= len(passwd) / 2.0
-
-
-if __name__ == '__main__':
-    passwd = 'Abcdefghijkl1234567!'
-    print('passwd: {}, valid passwd: {}'.format(passwd, verify_passwd(passwd)))

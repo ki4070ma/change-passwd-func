@@ -19,9 +19,3 @@ def change_passwd_func(old_passwd, new_passwd):
         print('[OK] Changed password successfully')
         return True
     return False
-
-
-if __name__ == '__main__':
-    old_passwd = '1aBcDeFgHiJkLmNoPqRsTuV!'
-    new_passwd = '1aBcDeFgHiJkLmNoPqRsTuV!123456789'
-    change_passwd_func(old_passwd, new_passwd)

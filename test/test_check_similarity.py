@@ -97,9 +97,6 @@ class TestCheckSimilarity(object):
         Case1:
             str1: ooooooo
             str2: oooooooooo
-        Case2:
-            str1: oooooooooo
-            str2: ooooooo
         '''
 
         # TestIdx: 13, 14
@@ -114,6 +111,11 @@ class TestCheckSimilarity(object):
             str1, str2 = strings_generator_dest_str_longer(str_diff_num)
             assert check_similarity(str1, str2)
 
+        '''
+        Case2:
+            str1: oooooooooo
+            str2: ooooooo
+        '''
         # TestIdx: 16, 17
         @pytest.mark.parametrize('str_diff_num', [-1, 0])
         def test_check_similarity_not_similar_src_string_longer(self, str_diff_num):  # 79%/80% matching
