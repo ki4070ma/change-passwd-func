@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from .check_similarity import check_similarity
+from .check_similarity import similar
 from .verify_passwd import verify_passwd
 
 
@@ -13,7 +13,7 @@ def change_passwd_func(old_passwd, new_passwd):
         print('[NG] Could not change password due to invalid old password')
     elif not verify_passwd(new_passwd):
         print('[NG] Could not change password due to invalid new password')
-    elif not check_similarity(old_passwd, new_passwd):
+    elif not similar(old_passwd, new_passwd):
         print('[NG] Could not change password due to similar to previous one')
     else:
         print('[OK] Changed password successfully')

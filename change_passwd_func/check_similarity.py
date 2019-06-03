@@ -5,7 +5,7 @@ from Levenshtein import distance
 from .constants import SIMILARITY_THRESHOLD
 
 
-def check_similarity(string1, string2):
+def similar(string1, string2):
     '''
 
     Considered that strings1/2 has alphabet or numeric or special chars(`constants.SP_CHARS`)
