@@ -11,7 +11,7 @@ from test.helper.helper import (
 
 import pytest
 
-from change_passwd_func.check_similarity import similar
+from change_pswd_func.check_similarity import similar
 
 
 class TestCheckSimilarity(object):
