@@ -13,6 +13,7 @@ from change_pswd_func.constants import (
     SIMILARITY_THRESHOLD,
     SP_CHARS
 )
+from change_pswd_func.find_pswd import load_system_pswd
 
 
 class TestChangePasswd(object):
@@ -134,3 +135,8 @@ class TestChangePasswd(object):
             old_pswd = pswd_generator(pswd_base='!1', length=length, incl_sp_char=False)
             new_pswd = pswd_changer(old_pswd, diff_ratio=0.3)
             assert change_pswd(old_pswd, new_pswd)
+
+    def test_change_pswd_not_found(self):
+        old_pswd = load_system_pswd()[-1]*2
+        new_pswd = 'DUMMY'
+        assert not change_pswd(old_pswd, new_pswd)

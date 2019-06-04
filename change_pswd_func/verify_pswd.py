@@ -32,11 +32,13 @@ def verify_pswd(pswd):
         return True
     return False
 
+
 def _check_length(pswd):
     '''
     [Password requirement] 1. At least 18 alphanumeric characters and list of special chars !@#$&*
     '''
     return len(pswd) < MIN_VALID_LENGTH or len(pswd) > MAX_VALID_LENGTH
+
 
 def _include_invalid_char(pswd):
     '''

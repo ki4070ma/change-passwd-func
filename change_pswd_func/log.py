@@ -29,7 +29,7 @@ class LogMsgVerifyPswd(object):
 class LogMsgChangePaswd(object):
     # TODO Can be used these msg to check which message is shown when validation is failed on unit test
 
-    INVALID_OLD_PSWD = '[NG] Could not change password due to invalid old password'
+    INVALID_OLD_PSWD = '[NG] Could not find old password in the system'
 
     INVALID_NEW_PSWD = '[NG] Could not change password due to invalid new password'
 
