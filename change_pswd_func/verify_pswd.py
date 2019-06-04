@@ -33,9 +33,15 @@ def verify_pswd(pswd):
     return False
 
 def _check_length(pswd):
+    '''
+    [Password requirement] 1. At least 18 alphanumeric characters and list of special chars !@#$&*
+    '''
     return len(pswd) < MIN_VALID_LENGTH or len(pswd) > MAX_VALID_LENGTH
 
 def _include_invalid_char(pswd):
+    '''
+    [Password requirement] 1. At least 18 alphanumeric characters and list of special chars !@#$&*
+    '''
     for x in pswd:
         # x.isalnum() unavailable for Hiragana, Kanji, etc
         if not bool(re.search('[0-9a-zA-Z]', x)) and x not in SP_CHARS:
@@ -44,6 +50,9 @@ def _include_invalid_char(pswd):
 
 
 def _include_not_all_patterns(pswd):
+    '''
+    [Password requirement] 2. At least 1 Upper case, 1 lower case ,least 1 numeric, 1 special character
+    '''
     upper_flg = False
     lower_flg = False
     num_flg = False
@@ -63,6 +72,9 @@ def _include_not_all_patterns(pswd):
 
 
 def _include_over_continuous_same_chars(pswd):
+    '''
+    [Password requirement] 3. No duplicate repeat characters more than 4
+    '''
     count = 1
     prev_char = pswd[0]
     for x in list(pswd)[1:]:
@@ -78,6 +90,9 @@ def _include_over_continuous_same_chars(pswd):
 
 
 def _include_over_sp_char_num(pswd):
+    '''
+    [Password requirement] 4. No more than 4 special characters
+    '''
     count = 0
     for c in SP_CHARS:
         count += pswd.count(c)
@@ -85,6 +100,9 @@ def _include_over_sp_char_num(pswd):
 
 
 def _include_num_more_than_half_of_length(pswd):
+    '''
+    [Password requirement] 5. 50 % of password should not be a number
+    '''
     count = 0
     for c in pswd:
         if c.isnumeric():
