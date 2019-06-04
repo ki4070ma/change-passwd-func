@@ -16,6 +16,7 @@ CHAR_NUM = '1'
 
 PSWD_LENGTH = 100
 
+
 def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH,
                    incl_upper_char=True, incl_lower_char=True, incl_num=True, incl_sp_char=True):
     '''Generate password
@@ -53,14 +54,22 @@ def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH,
         pswd_base = pswd_base[:-1] + SP_CHARS[0]
     return pswd_base
 
-def pswd_changer(pswd, diff_ratio):
+
+def pswd_changer(pswd, diff_ratio=(1-SIMILARITY_THRESHOLD+0.01)):
     '''
+
+    Default 79% match.
+    As caution, `diff_ratio` works well for more than or equal to 100 password length.
+    If length is less than 100, set `diff_ratio` bigger value.
 
     :param pswd:
     :param diff_ratio:
     :return:
     '''
+    print('****')
+    print(int(len(pswd) * diff_ratio))
     return pswd.replace(CHAR_UPPER_1, CHAR_UPPER_2, int(len(pswd) * diff_ratio))
+
 
 def strings_generator_same_tail(str_diff_num, length=PSWD_LENGTH):
     '''Check similarity between two strings with `str_diff_num`.

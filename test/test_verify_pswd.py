@@ -23,7 +23,7 @@ class TestVerifyPasswd(object):
             assert not verify_pswd(pswd_generator(length=length, incl_sp_char=False))
 
         # TestIdx: 2
-        @pytest.mark.parametrize('length', [MIN_VALID_LENGTH-1])
+        @pytest.mark.parametrize('length', [MIN_VALID_LENGTH - 1])
         def test_verify_pswd_not_enough_length(self, length):
             assert not verify_pswd(pswd_generator(length=length))
 
@@ -39,7 +39,7 @@ class TestVerifyPasswd(object):
 
     class TestVerifyPasswdInvalidChar(object):
         # TestIdx: 6
-        @pytest.mark.parametrize('invalid_char', ['-', 'あ', '^', '朝', 'ไทย', 'Ａ'])
+        @pytest.mark.parametrize('invalid_char', ['-', 'あ', '^', '朝', 'ไทย', 'Ａ'])  # Ａ isl full-width
         def test_verify_pswd_various_invalid_char(self, invalid_char):
             assert not verify_pswd(pswd_generator(pswd_base=invalid_char))
 
@@ -70,7 +70,7 @@ class TestVerifyPasswd(object):
             assert verify_pswd(pswd_generator(pswd_base='a' * continous_num))
 
         # TestIdx: 13
-        @pytest.mark.parametrize('continous_num', [MAX_CHAR_CONTINUOUS_NUM+1])
+        @pytest.mark.parametrize('continous_num', [MAX_CHAR_CONTINUOUS_NUM + 1])
         def test_verify_pswd_over_continuous_same_char_num(self, continous_num):
             assert not verify_pswd(pswd_generator(pswd_base='a' * continous_num))
 

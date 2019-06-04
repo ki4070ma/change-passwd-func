@@ -19,4 +19,4 @@ def similar(string1, string2):
     print('[string2]: {}'.format(string2))
     normalized_distance = distance(string1, string2) / max(len(string1), len(string2))
     print('[similarity]: {}%'.format(int((1-normalized_distance)*100)))
-    return normalized_distance < 1 - SIMILARITY_THRESHOLD
+    return 1 - normalized_distance > SIMILARITY_THRESHOLD

@@ -10,7 +10,7 @@ def change_pswd_func(old_pswd, new_pswd):
         print('[NG] Could not change password due to invalid old password')
     elif not verify_pswd(new_pswd):
         print('[NG] Could not change password due to invalid new password')
-    elif not similar(old_pswd, new_pswd):
+    elif similar(old_pswd, new_pswd):
         print('[NG] Could not change password due to similar to previous one')
     else:
         print('[OK] Changed password successfully')
