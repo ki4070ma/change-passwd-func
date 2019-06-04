@@ -2,7 +2,7 @@
 
 import argparse
 
-from change_pswd_func.change_pswd_func import change_pswd_func
+from change_pswd_func.change_pswd_func import change_pswd
 
 if __name__ == '__main__':
 
@@ -12,4 +12,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    change_pswd_func(args.old_pswd, args.new_pswd)
+    change_pswd(args.old_pswd, args.new_pswd)
