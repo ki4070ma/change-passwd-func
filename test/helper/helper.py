@@ -66,7 +66,6 @@ def pswd_changer(pswd, diff_ratio=(1-SIMILARITY_THRESHOLD+0.01)):
     :param diff_ratio:
     :return:
     '''
-    print('****')
     print(int(len(pswd) * diff_ratio))
     return pswd.replace(CHAR_UPPER_1, CHAR_UPPER_2, int(len(pswd) * diff_ratio))
 

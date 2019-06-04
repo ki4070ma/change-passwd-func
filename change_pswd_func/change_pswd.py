@@ -1,18 +1,28 @@
 #!/usr/bin/env python
 
 from .check_similarity import similar
+from .find_pswd import find_pswd
+from .log import LogMsgChangePaswd
 from .verify_pswd import verify_pswd
 
 
 def change_pswd(old_pswd, new_pswd):
-    if not verify_pswd(old_pswd):
-        # SHOULD NOT be here for old password. Old password must meet password requirements
-        print('[NG] Could not change password due to invalid old password')
+    if not find_pswd(old_pswd):
+        '''
+        [Change password requirement] 1. Old password should match with system
+        '''
+        print(LogMsgChangePaswd.INVALID_OLD_PSWD)
     elif not verify_pswd(new_pswd):
-        print('[NG] Could not change password due to invalid new password')
+        '''
+        [Change password requirement] 2. New password should be a valid password
+        '''
+        print(LogMsgChangePaswd.INVALID_NEW_PSWD)
     elif similar(old_pswd, new_pswd):
-        print('[NG] Could not change password due to similar to previous one')
+        '''
+        [Change password requirement] 3. password is not similar to old password < 80% match.
+        '''
+        print(LogMsgChangePaswd.SIMILAR_TO_OLD_ONE)
     else:
-        print('[OK] Changed password successfully')
+        print(LogMsgChangePaswd.SUCCESS)
         return True
     return False

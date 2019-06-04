@@ -6,17 +6,22 @@ from .constants import SIMILARITY_THRESHOLD
 
 
 def similar(string1, string2):
-    '''
+    '''Check two strings similarity
 
-    Considered that strings1/2 has alphabet or numeric or special chars(`constants.SP_CHARS`)
+    Calculate distance between two strings and compare distance with threshold
 
     [Change password requirement]
     3. password is not similar to old password < 80% match.
 
+    Returns:
+        bool: True if two strings are similar otherwise False
+
     '''
 
-    print('\n[string1]: {}'.format(string1))
+    if type(string1) is not str or type(string2) is not str:
+        raise TypeError('Args need to be str type.')
+
+    print('\n[string1]: {}'.format(string1))  # '\n' is for pytest output
     print('[string2]: {}'.format(string2))
     normalized_distance = distance(string1, string2) / max(len(string1), len(string2))
-    print('[similarity]: {}%'.format(int((1-normalized_distance)*100)))
     return 1 - normalized_distance > SIMILARITY_THRESHOLD

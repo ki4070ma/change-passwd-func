@@ -8,7 +8,8 @@ from .constants import (
 )
 
 
-class ErrorMsgVerifyPswd(object):
+class LogMsgVerifyPswd(object):
+    # TODO Can be used these msg to check which message is shown when validation is failed on unit test
 
     INVALID_LENGTH = '[NG] The length needs to be from {} to {}.'.format(MIN_VALID_LENGTH, MAX_VALID_LENGTH)
 
@@ -21,3 +22,17 @@ class ErrorMsgVerifyPswd(object):
     OVER_SP_CHAR_NUM = '[NG] Included more than {} special characters'.format(MAX_SP_CHAR_NUM)
 
     MORE_THAN_HALF_OF_LENGTH = '[NG] 50 % of password should not be a number'
+
+    VALID = '[OK] Valid password'
+
+
+class LogMsgChangePaswd(object):
+    # TODO Can be used these msg to check which message is shown when validation is failed on unit test
+
+    INVALID_OLD_PSWD = '[NG] Could not find old password in the system'
+
+    INVALID_NEW_PSWD = '[NG] Could not change password due to invalid new password'
+
+    SIMILAR_TO_OLD_ONE = '[NG] Could not change password due to similar to previous one'
+
+    SUCCESS = '[OK] Changed password successfully'

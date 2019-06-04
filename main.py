@@ -2,7 +2,7 @@
 
 import argparse
 
-from change_pswd_func.change_pswd_func import change_pswd
+from change_pswd_func.change_pswd import change_pswd
 
 if __name__ == '__main__':
 
