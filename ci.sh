@@ -1,3 +1,3 @@
 #!/bin/sh
 
-python -m pytest --capture=no --verbose --cvo . --cov-report=html
+python -m pytest --capture=no --verbose --cov . --cov-report=html
