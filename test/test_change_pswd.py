@@ -33,7 +33,7 @@ class TestChangePasswd(object):
     # [Similarity] Dissimilar
     @pytest.mark.parametrize('length', [MIN_VALID_LENGTH, 100, MAX_VALID_LENGTH])
     @pytest.mark.parametrize('add_diff_ratio', [0.1])  # <80% matching
-    def test_change_pswd_valid_length_dissimilar_min_valid_length(self, length, add_diff_ratio):
+    def test_change_pswd_valid_length_dissimilar(self, length, add_diff_ratio):
         old_pswd = pswd_generator(length=length)
         new_pswd = pswd_changer(old_pswd, diff_ratio=(1-SIMILARITY_THRESHOLD+add_diff_ratio))
         assert change_pswd(old_pswd, new_pswd)
@@ -46,12 +46,12 @@ class TestChangePasswd(object):
             new_pswd = pswd_changer(old_pswd)[:-1]
             assert not change_pswd(old_pswd, new_pswd)
 
-        def test_change_pswd_over_enough_length(self):
+        def test_change_pswd_over_valid_length(self):
             old_pswd = pswd_generator(length=MAX_VALID_LENGTH)
-            new_pswd = pswd_changer(old_pswd) + 'ABC'
+            new_pswd = pswd_changer(old_pswd) + 'A'
             assert not change_pswd(old_pswd, new_pswd)
 
-        @pytest.mark.parametrize('invalid_char', ['-', 'あ', '^', '朝', 'ไทย', 'Ａ'])  # Ａ isl full-width
+        @pytest.mark.parametrize('invalid_char', ['-', 'あ', '^', '朝', 'ไทย', 'Ａ'])  # Ａ is full-width
         def test_change_pswd_various_invalid_char(self, invalid_char):
             old_pswd = pswd_generator()
             new_pswd = pswd_changer(old_pswd)[:-1] + invalid_char
@@ -136,6 +136,8 @@ class TestChangePasswd(object):
             new_pswd = pswd_changer(old_pswd, diff_ratio=0.3)
             assert change_pswd(old_pswd, new_pswd)
 
+    # TestIdx: 23
+    # [Old password] Doesn't exist in the system
     def test_change_pswd_not_found(self):
         old_pswd = load_system_pswd()[-1]*2
         new_pswd = 'DUMMY'

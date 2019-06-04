@@ -9,16 +9,19 @@
 ## How to run test
 
 ```
-(setup python environment. eihter py2 or py3)
-$ pip install pytest
+$ git clone git@github.com:ki4070ma/change-passwd-func.git
 $ cd /path/to/change_passwd_func
+(setup python3 environment)
+$ pip install -r requirements.txt
 $ py.test
+$ (py.test --capture=no --verbose --cov . --cov-report=html)
 ```
 
 ## Test design and Test cases
+Used decision table to check coverage
 
-### Verify password
-* https://docs.google.com/spreadsheets/d/1Gq1EUD5i_Ko0uE9PCUINHnwNm5oDvesw5OMNhHfZT14/edit?usp=sharing
+* For verify_pswd, find_pswd, check_similarity, change_pswd
+    * https://docs.google.com/spreadsheets/d/1Gq1EUD5i_Ko0uE9PCUINHnwNm5oDvesw5OMNhHfZT14/edit?usp=sharing
 
 
 # Objective

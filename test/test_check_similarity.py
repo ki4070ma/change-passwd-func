@@ -16,6 +16,10 @@ from change_pswd_func.check_similarity import similar
 
 class TestCheckSimilarity(object):
 
+    def test_similar_exception(self):
+        with pytest.raises(TypeError):
+            similar(123, [1, 2, 3])
+
     class TestCheckSimilaritySameLengthMatchTailString(object):
         '''
         Case:
