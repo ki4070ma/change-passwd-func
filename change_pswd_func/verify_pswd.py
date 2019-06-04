@@ -9,33 +9,36 @@ from .constants import (
     MIN_VALID_LENGTH,
     SP_CHARS
 )
-from .error_msg import ErrorMsgVerifyPswd
+from .log import LogMsgVerifyPswd
 
 
 def verify_pswd(pswd):
-    print('\n[pswd]: {}'.format(pswd))
-    if len(pswd) < MIN_VALID_LENGTH or len(pswd) > MAX_VALID_LENGTH:
+    print('\n[pswd]: {}'.format(pswd))  # '\n' is for pytest output
+    if _check_length(pswd):
         print('Password length is {}.'.format(len(pswd)))
-        print(ErrorMsgVerifyPswd.INVALID_LENGTH)
+        print(LogMsgVerifyPswd.INVALID_LENGTH)
     elif _include_invalid_char(pswd):
-        print(ErrorMsgVerifyPswd.INVALID_CHAR)
+        print(LogMsgVerifyPswd.INVALID_CHAR)
     elif _include_not_all_patterns(pswd):
-        print(ErrorMsgVerifyPswd.NOT_ALL_PATTERNS)
+        print(LogMsgVerifyPswd.NOT_ALL_PATTERNS)
     elif _include_over_continuous_same_chars(pswd):
-        print(ErrorMsgVerifyPswd.OVER_CONTINUOUS_SAME_CHARS)
+        print(LogMsgVerifyPswd.OVER_CONTINUOUS_SAME_CHARS)
     elif _include_over_sp_char_num(pswd):
-        print(ErrorMsgVerifyPswd.OVER_SP_CHAR_NUM)
+        print(LogMsgVerifyPswd.OVER_SP_CHAR_NUM)
     elif _include_num_more_than_half_of_length(pswd):
-        print(ErrorMsgVerifyPswd.MORE_THAN_HALF_OF_LENGTH)
+        print(LogMsgVerifyPswd.MORE_THAN_HALF_OF_LENGTH)
     else:
-        print('Valid password')
+        print(LogMsgVerifyPswd.VALID)
         return True
     return False
 
+def _check_length(pswd):
+    return len(pswd) < MIN_VALID_LENGTH or len(pswd) > MAX_VALID_LENGTH
 
 def _include_invalid_char(pswd):
     for x in pswd:
-        if not bool(re.search('[0-9a-zA-Z]', x)) and x not in SP_CHARS:  # x.isalnum() unavailable for Hiragana, Kanji, etc
+        # x.isalnum() unavailable for Hiragana, Kanji, etc
+        if not bool(re.search('[0-9a-zA-Z]', x)) and x not in SP_CHARS:
             return True
     return False
 

@@ -18,7 +18,8 @@ from change_pswd_func.constants import (
 class TestChangePasswd(object):
 
     # TestIdx: 1, 3, 5
-    # [Length]: Valid various lengths, [Similarity] Similar
+    # [Old, new password length]: Valid various lengths
+    # [Similarity] Similar
     @pytest.mark.parametrize('length', [MIN_VALID_LENGTH, 100, MAX_VALID_LENGTH])
     @pytest.mark.parametrize('add_diff_ratio', [-0.1, 0])  # >=80% matching
     def test_change_pswd_valid_length_similar(self, length, add_diff_ratio):
@@ -27,7 +28,8 @@ class TestChangePasswd(object):
         assert not change_pswd(old_pswd, new_pswd)
 
     # TestIdx: 2, 4, 6
-    # [Length]: Valid various lengths, [Similarity] Dissimilar
+    # [Old, new password length]: Valid various lengths
+    # [Similarity] Dissimilar
     @pytest.mark.parametrize('length', [MIN_VALID_LENGTH, 100, MAX_VALID_LENGTH])
     @pytest.mark.parametrize('add_diff_ratio', [0.1])  # <80% matching
     def test_change_pswd_valid_length_dissimilar_min_valid_length(self, length, add_diff_ratio):
