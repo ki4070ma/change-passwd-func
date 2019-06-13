@@ -55,8 +55,8 @@ be appreciated
 
 # Change password function
 ## Requirements
-```ChangePassword(oldPassword: String, newPassword: String)```
--> ```change_pswd(old_pswd: str, new_pswd: str) -> bool```
+* ```ChangePassword(oldPassword: String, newPassword: String)```
+   * [py] ```change_pswd(old_pswd: str, new_pswd: str) -> bool```
 
 ## Tasks
 Please complete the point below
