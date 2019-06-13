@@ -6,15 +6,15 @@
 ## Add password requirement
 1. At least 18 alphanumeric characters and list of special chars !@#$&*
    * [Add] Maximum length is 1000.
-      * Because 1000 is enough as password and wouldn't like not to take care of large length like `sys.maxsize` from quality point of view. Too large size may impact to system like performance wise.
+      * Because 1000 is enough as password and would like not to take care of large length like `sys.maxsize` from quality point of view. Too large length password may impact to the system like performance wise.
 
 
 ## How to run test
 
 ```
+(setup python3 environment)
 $ git clone git@github.com:ki4070ma/change-passwd-func.git
 $ cd /path/to/change_passwd_func
-(setup python3 environment)
 $ pip install -r requirements.txt
 $ py.test
 $ (py.test --capture=no --verbose --cov . --cov-report=html)
@@ -26,6 +26,19 @@ Used decision table to check coverage
 * For verify_pswd, find_pswd, check_similarity, change_pswd
     * https://docs.google.com/spreadsheets/d/1Gq1EUD5i_Ko0uE9PCUINHnwNm5oDvesw5OMNhHfZT14/edit?usp=sharing
 
+## Others
+* You can try ```main.py``` as below
+
+```bash
+$python main.py "\!12Ab11Ab11Ab11Ab11Ab" "\!12Ab11Ab11abcdefghij"
+
+[pswd]: !12Ab11Ab11abcdefghij
+[OK] Valid password
+
+[string1]: !12Ab11Ab11Ab11Ab11Ab
+[string2]: !12Ab11Ab11abcdefghij
+[OK] Changed password successfully
+```
 
 # Objective
 We want you to create a change password function based on below specification.
@@ -42,7 +55,8 @@ be appreciated
 
 # Change password function
 ## Requirements
-```ChangePassword(oldPassword: String, newPassword: String)```
+* ```ChangePassword(oldPassword: String, newPassword: String)```
+   * [py] ```change_pswd(old_pswd: str, new_pswd: str) -> bool```
 
 ## Tasks
 Please complete the point below
