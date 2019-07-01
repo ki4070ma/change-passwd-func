@@ -17,7 +17,7 @@ $ git clone git@github.com:ki4070ma/change-passwd-func.git
 $ cd /path/to/change_passwd_func
 $ pip install -r requirements.txt
 $ py.test
-$ (py.test --capture=no --verbose --cov . --cov-report=html)
+$ (py.test --capture=no --verbose --cov . --cov-report=html)  # To show details and generate code coverage report
 ```
 
 ## Test design and Test cases
@@ -30,7 +30,7 @@ Used decision table to check coverage
 * You can try ```main.py``` as below
 
 ```bash
-$python main.py "\!12Ab11Ab11Ab11Ab11Ab" "\!12Ab11Ab11abcdefghij"
+$python3 main.py "\!12Ab11Ab11Ab11Ab11Ab" "\!12Ab11Ab11abcdefghij"
 
 [pswd]: !12Ab11Ab11abcdefghij
 [OK] Valid password
