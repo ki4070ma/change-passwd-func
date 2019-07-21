@@ -12,7 +12,7 @@ from .constants import (
 from .log import LogMsgVerifyPswd
 
 
-def verify_pswd(pswd):
+def verify_pswd(pswd: str) -> bool:
     print('\n[pswd]: {}'.format(pswd))  # '\n' is for pytest output
     if _check_length(pswd):
         print('Password length is {}.'.format(len(pswd)))
@@ -33,14 +33,14 @@ def verify_pswd(pswd):
     return False
 
 
-def _check_length(pswd):
+def _check_length(pswd: str) -> bool:
     '''
     [Password requirement] 1. At least 18 alphanumeric characters and list of special chars !@#$&*
     '''
     return len(pswd) < MIN_VALID_LENGTH or len(pswd) > MAX_VALID_LENGTH
 
 
-def _include_invalid_char(pswd):
+def _include_invalid_char(pswd: str) -> bool:
     '''
     [Password requirement] 1. At least 18 alphanumeric characters and list of special chars !@#$&*
     '''
@@ -51,7 +51,7 @@ def _include_invalid_char(pswd):
     return False
 
 
-def _include_not_all_patterns(pswd):
+def _include_not_all_patterns(pswd: str) -> bool:
     '''
     [Password requirement] 2. At least 1 Upper case, 1 lower case ,least 1 numeric, 1 special character
     '''
@@ -73,7 +73,7 @@ def _include_not_all_patterns(pswd):
     return True
 
 
-def _include_over_continuous_same_chars(pswd):
+def _include_over_continuous_same_chars(pswd: str) -> bool:
     '''
     [Password requirement] 3. No duplicate repeat characters more than 4
     '''
@@ -91,7 +91,7 @@ def _include_over_continuous_same_chars(pswd):
     return False
 
 
-def _include_over_sp_char_num(pswd):
+def _include_over_sp_char_num(pswd: str) -> bool:
     '''
     [Password requirement] 4. No more than 4 special characters
     '''
@@ -101,7 +101,7 @@ def _include_over_sp_char_num(pswd):
     return count > MAX_SP_CHAR_NUM
 
 
-def _include_num_more_than_half_of_length(pswd):
+def _include_num_more_than_half_of_length(pswd: str) -> bool:
     '''
     [Password requirement] 5. 50 % of password should not be a number
     '''
