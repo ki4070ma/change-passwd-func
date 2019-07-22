@@ -6,7 +6,7 @@ from .log import LogMsgChangePaswd
 from .verify_pswd import verify_pswd
 
 
-def change_pswd(old_pswd, new_pswd):
+def change_pswd(old_pswd: str, new_pswd: str) -> bool:
     if not find_pswd(old_pswd):
         '''
         [Change password requirement] 1. Old password should match with system

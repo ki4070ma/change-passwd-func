@@ -5,7 +5,7 @@ from Levenshtein import distance
 from .constants import SIMILARITY_THRESHOLD
 
 
-def similar(string1, string2):
+def similar(string1: str, string2: str) -> bool:
     '''Check two strings similarity
 
     Calculate distance between two strings and compare distance with threshold

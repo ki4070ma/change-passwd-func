@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from typing import TypeVar, Generic
+
 from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,
     MAX_SP_CHAR_NUM,
@@ -7,8 +9,9 @@ from .constants import (
     MIN_VALID_LENGTH
 )
 
+T = TypeVar('T')
 
-class LogMsgVerifyPswd(object):
+class LogMsgVerifyPswd(Generic[T]):
     # TODO Can be used these msg to check which message is shown when validation is failed on unit test
 
     INVALID_LENGTH = '[NG] The length needs to be from {} to {}.'.format(MIN_VALID_LENGTH, MAX_VALID_LENGTH)
@@ -26,7 +29,7 @@ class LogMsgVerifyPswd(object):
     VALID = '[OK] Valid password'
 
 
-class LogMsgChangePaswd(object):
+class LogMsgChangePaswd(Generic[T]):
     # TODO Can be used these msg to check which message is shown when validation is failed on unit test
 
     INVALID_OLD_PSWD = '[NG] Could not find old password in the system'
