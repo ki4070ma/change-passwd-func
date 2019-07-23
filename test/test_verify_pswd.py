@@ -2,7 +2,7 @@
 
 from test.helper.helper import pswd_generator
 
-import pytest
+import pytest  # type: ignore
 
 from change_pswd_func.constants import (
     MAX_CHAR_CONTINUOUS_NUM,

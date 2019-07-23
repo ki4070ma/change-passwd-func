@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from Levenshtein import distance
+from Levenshtein import distance  # type: ignore
 
 from .constants import SIMILARITY_THRESHOLD
 
