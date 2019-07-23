@@ -11,6 +11,7 @@ from .constants import (
 
 T = TypeVar('T')
 
+
 class LogMsgVerifyPswd(Generic[T]):
     # TODO Can be used these msg to check which message is shown when validation is failed on unit test
 
