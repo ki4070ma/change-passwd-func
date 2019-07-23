@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from typing import TypeVar, Generic
+from typing import Generic, TypeVar
 
 from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,

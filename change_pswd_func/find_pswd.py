@@ -2,6 +2,7 @@
 
 from typing import List
 
+
 def find_pswd(pswd: str) -> bool:
     return pswd in load_system_pswd()
 
