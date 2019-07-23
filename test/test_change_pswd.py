@@ -2,7 +2,7 @@
 
 from test.helper.helper import pswd_changer, pswd_generator
 
-import pytest
+import pytest  # type: ignore
 
 from change_pswd_func.change_pswd import change_pswd
 from change_pswd_func.constants import (

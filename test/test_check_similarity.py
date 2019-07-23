@@ -9,7 +9,7 @@ from test.helper.helper import (
     strings_generator_src_string_longer
 )
 
-import pytest
+import pytest  # type: ignore
 
 from change_pswd_func.check_similarity import similar
 

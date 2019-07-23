@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from typing import TypeVar, Generic
+from typing import Generic, TypeVar
 
 from .constants import (
     MAX_CHAR_CONTINUOUS_NUM,
@@ -10,6 +10,7 @@ from .constants import (
 )
 
 T = TypeVar('T')
+
 
 class LogMsgVerifyPswd(Generic[T]):
     # TODO Can be used these msg to check which message is shown when validation is failed on unit test
