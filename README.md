@@ -14,7 +14,7 @@
 ```
 (setup python3 environment)
 $ git clone git@github.com:ki4070ma/change-passwd-func.git
-$ cd /path/to/change_passwd_func
+$ cd change_passwd_func
 $ pip install -r requirements.txt
 $ py.test
 $ (py.test --capture=no --verbose --cov . --cov-report=html)  # To show details and generate code coverage report
