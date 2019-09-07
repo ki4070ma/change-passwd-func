@@ -11,3 +11,5 @@ htmlcov
 
 .pylintrc
 .mypy_cache
+
+site
