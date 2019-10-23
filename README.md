@@ -40,6 +40,9 @@ $python3 main.py "\!12Ab11Ab11Ab11Ab11Ab" "\!12Ab11Ab11abcdefghij"
 [OK] Changed password successfully
 ```
 
+* Use Gitpod as Web IDE
+** See https://www.gitpod.io/docs/10_getting_started/
+
 # Objective
 We want you to create a change password function based on below specification.
 This change password function will just return True or False back to function caller to inform the caller
