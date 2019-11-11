@@ -41,7 +41,7 @@ $python3 main.py "\!12Ab11Ab11Ab11Ab11Ab" "\!12Ab11Ab11abcdefghij"
 ```
 
 * Use Gitpod as Web IDE
-** See https://www.gitpod.io/docs/10_getting_started/
+   * See https://www.gitpod.io/docs/10_getting_started/
 
 # Objective
 We want you to create a change password function based on below specification.
