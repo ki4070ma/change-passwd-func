@@ -18,12 +18,14 @@ from change_pswd_func.find_pswd import load_system_pswd
 
 class TestChangePasswd(object):
 
-    # TestIdx: 1, 3, 5
-    # [Old, new password length]: Valid various lengths
-    # [Similarity] Similar
     @pytest.mark.parametrize('length', [MIN_VALID_LENGTH, 100, MAX_VALID_LENGTH])
     @pytest.mark.parametrize('add_diff_ratio', [-0.1, 0])  # >=80% matching
     def test_change_pswd_valid_length_similar(self, length, add_diff_ratio):
+        """TestIdx: 1, 3, 5
+
+        [Old, new password length]: Valid various lengths
+        [Similarity] Similar
+        """
         old_pswd = pswd_generator(length=length)
         new_pswd = pswd_changer(old_pswd, diff_ratio=(1-SIMILARITY_THRESHOLD+add_diff_ratio))
         assert not change_pswd(old_pswd, new_pswd)
