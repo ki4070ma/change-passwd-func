@@ -1,25 +1,27 @@
 #!/usr/bin/env python
 
-from change_pswd_func.constants import (
-    MIN_VALID_LENGTH,
-    SIMILARITY_THRESHOLD,
-    SP_CHARS
-)
+from change_pswd_func.constants import MIN_VALID_LENGTH, SIMILARITY_THRESHOLD, SP_CHARS
 
-CHAR_UPPER_1 = 'A'
+CHAR_UPPER_1 = "A"
 
-CHAR_UPPER_2 = 'C'
+CHAR_UPPER_2 = "C"
 
-CHAR_LOWER = 'b'
+CHAR_LOWER = "b"
 
-CHAR_NUM = '1'
+CHAR_NUM = "1"
 
 PSWD_LENGTH = 100
 
 
-def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH,
-                   incl_upper_char=True, incl_lower_char=True, incl_num=True, incl_sp_char=True):
-    '''Generate password
+def pswd_generator(
+    pswd_base="",
+    length=MIN_VALID_LENGTH,
+    incl_upper_char=True,
+    incl_lower_char=True,
+    incl_num=True,
+    incl_sp_char=True,
+):
+    """Generate password
 
     To generate password along to points in below file
     https://docs.google.com/spreadsheets/d/1Gq1EUD5i_Ko0uE9PCUINHnwNm5oDvesw5OMNhHfZT14/edit#gid=0
@@ -42,21 +44,21 @@ def pswd_generator(pswd_base='', length=MIN_VALID_LENGTH,
 
     Returns:
          str: Genrated password
-    '''
+    """
 
-    base_str = ''
-    base_str += CHAR_UPPER_1 if incl_upper_char else ''
-    base_str += CHAR_LOWER if incl_lower_char else ''
-    base_str += CHAR_NUM * len(base_str) if incl_num else ''
-    for i in range(length-len(pswd_base)):
+    base_str = ""
+    base_str += CHAR_UPPER_1 if incl_upper_char else ""
+    base_str += CHAR_LOWER if incl_lower_char else ""
+    base_str += CHAR_NUM * len(base_str) if incl_num else ""
+    for i in range(length - len(pswd_base)):
         pswd_base += base_str[i % len(base_str)]
     if incl_sp_char:
         pswd_base = pswd_base[:-1] + SP_CHARS[0]
     return pswd_base
 
 
-def pswd_changer(pswd, diff_ratio=(1-SIMILARITY_THRESHOLD+0.01)):
-    '''
+def pswd_changer(pswd, diff_ratio=(1 - SIMILARITY_THRESHOLD + 0.01)):
+    """
 
     Default 79% match.
     As caution, `diff_ratio` works well for more than or equal to 100 password length.
@@ -65,13 +67,13 @@ def pswd_changer(pswd, diff_ratio=(1-SIMILARITY_THRESHOLD+0.01)):
     :param pswd:
     :param diff_ratio:
     :return:
-    '''
+    """
     print(int(len(pswd) * diff_ratio))
     return pswd.replace(CHAR_UPPER_1, CHAR_UPPER_2, int(len(pswd) * diff_ratio))
 
 
 def strings_generator_same_tail(str_diff_num, length=PSWD_LENGTH):
-    '''Check similarity between two strings with `str_diff_num`.
+    """Check similarity between two strings with `str_diff_num`.
 
     One string has difference which is timed by `SIMILARITY_THRESHOLD`
     and added `str_diff_num`.
@@ -94,16 +96,16 @@ def strings_generator_same_tail(str_diff_num, length=PSWD_LENGTH):
 
     Returns:
         str, str: Generated two strings
-    '''
+    """
 
-    len1 = int(length*SIMILARITY_THRESHOLD + str_diff_num)
-    str1 = '{}{}'.format('X' * (length - len1), 'o' * len1)
-    str2 = 'o' * length
+    len1 = int(length * SIMILARITY_THRESHOLD + str_diff_num)
+    str1 = "{}{}".format("X" * (length - len1), "o" * len1)
+    str2 = "o" * length
     return str1, str2
 
 
 def strings_generator_same_center(str_diff_num, length=PSWD_LENGTH):
-    '''Check similarity between two strings with `str_diff_num`.
+    """Check similarity between two strings with `str_diff_num`.
 
     One string has difference which is timed by `SIMILARITY_THRESHOLD`
     and added `str_diff_num`.
@@ -126,16 +128,18 @@ def strings_generator_same_center(str_diff_num, length=PSWD_LENGTH):
 
     Returns:
         str, str: Generated two strings
-    '''
+    """
 
     len1 = int(length * SIMILARITY_THRESHOLD + str_diff_num)
-    str1 = '{}{}{}'.format('o' * int(len1 / 2), 'X' * (length - len1), 'o' * (len1 - int(len1 / 2)))
-    str2 = 'o' * length
+    str1 = "{}{}{}".format(
+        "o" * int(len1 / 2), "X" * (length - len1), "o" * (len1 - int(len1 / 2))
+    )
+    str2 = "o" * length
     return str1, str2
 
 
 def strings_generator_same_head(str_diff_num, length=PSWD_LENGTH):
-    '''Check similarity between two strings with `str_diff_num`.
+    """Check similarity between two strings with `str_diff_num`.
 
     One string has difference which is timed by `SIMILARITY_THRESHOLD`
     and added `str_diff_num`.
@@ -158,16 +162,16 @@ def strings_generator_same_head(str_diff_num, length=PSWD_LENGTH):
 
     Returns:
         str, str: Generated two strings
-    '''
+    """
 
     len1 = int(length * SIMILARITY_THRESHOLD + str_diff_num)
-    str1 = '{}{}'.format('o' * len1, 'X' * (length - len1))
-    str2 = 'o' * length
+    str1 = "{}{}".format("o" * len1, "X" * (length - len1))
+    str2 = "o" * length
     return str1, str2
 
 
 def strings_generator_matched_char_mixed(str_diff_num, length=PSWD_LENGTH):
-    '''Check similarity between two strings with `str_diff_num`.
+    """Check similarity between two strings with `str_diff_num`.
 
     One string has difference which is timed by `SIMILARITY_THRESHOLD`
     and added `str_diff_num`.
@@ -190,22 +194,22 @@ def strings_generator_matched_char_mixed(str_diff_num, length=PSWD_LENGTH):
 
     Returns:
         str, str: Generated two strings
-    '''
+    """
 
     len1 = int(length * SIMILARITY_THRESHOLD + str_diff_num)
-    char_list = ['o'] * length
+    char_list = ["o"] * length
     for i in range(length - len1):
-        if char_list[2 * i + 1] != 'o':
-            char_list[2 * i + 1] = 'X'
+        if char_list[2 * i + 1] != "o":
+            char_list[2 * i + 1] = "X"
         else:
-            char_list[2 * i] = 'X'
-    str1 = ''.join(char_list)
-    str2 = 'o' * length
+            char_list[2 * i] = "X"
+    str1 = "".join(char_list)
+    str2 = "o" * length
     return str1, str2
 
 
 def strings_generator_dest_str_longer(str_diff_num, length=PSWD_LENGTH):
-    '''Check similarity between two strings with `str_diff_num`.
+    """Check similarity between two strings with `str_diff_num`.
 
     One string has difference which is timed by `SIMILARITY_THRESHOLD`
     and added `str_diff_num`.
@@ -228,15 +232,15 @@ def strings_generator_dest_str_longer(str_diff_num, length=PSWD_LENGTH):
 
     Returns:
         str, str: Generated two strings
-    '''
+    """
 
-    str1 = 'o'*int(length * SIMILARITY_THRESHOLD + str_diff_num)
-    str2 = 'o'*length
+    str1 = "o" * int(length * SIMILARITY_THRESHOLD + str_diff_num)
+    str2 = "o" * length
     return str1, str2
 
 
 def strings_generator_src_string_longer(str_diff_num, length=PSWD_LENGTH):
-    '''Check similarity between two strings with `str_diff_num`.
+    """Check similarity between two strings with `str_diff_num`.
 
     One string has difference which is timed by `SIMILARITY_THRESHOLD`
     and added `str_diff_num`.
@@ -259,7 +263,7 @@ def strings_generator_src_string_longer(str_diff_num, length=PSWD_LENGTH):
 
     Returns:
         str, str: Generated two strings
-    '''
-    str1 = 'o'*length
-    str2 = 'o'*int(length * SIMILARITY_THRESHOLD + str_diff_num)
+    """
+    str1 = "o" * length
+    str2 = "o" * int(length * SIMILARITY_THRESHOLD + str_diff_num)
     return str1, str2

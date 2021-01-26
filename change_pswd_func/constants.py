@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-SP_CHARS = ['!', '@', '#', '$', '&', '*']
+SP_CHARS = ["!", "@", "#", "$", "&", "*"]
 
 MIN_VALID_LENGTH = 18
 
