@@ -1,0 +1,25 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "11:00"
+  open-pull-requests-limit: 10
+  allow:
+  - dependency-type: direct
+  - dependency-type: indirect
+  ignore:
+  - dependency-name: pylint
+    versions:
+    - 2.7.0
+    - 2.7.1
+    - 2.7.2
+    - 2.7.4
+    - 2.8.1
+  - dependency-name: astroid
+    versions:
+    - "2.5"
+    - 2.5.1
+    - 2.5.2
+    - 2.5.3
