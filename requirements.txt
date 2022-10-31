@@ -2,7 +2,7 @@ autopep8==1.5.6
 pytest==6.2.2
 pytest-cov==2.12.1
 tox==3.23.1
-python-Levenshtein==0.12.2
+python-Levenshtein==0.20.8
 mypy==0.812
 
 astroid==2.4.2
