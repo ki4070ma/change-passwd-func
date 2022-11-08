@@ -3,7 +3,7 @@ pytest==6.2.2
 pytest-cov==2.12.1
 tox==3.23.1
 python-Levenshtein==0.12.2
-mypy==0.812
+mypy==0.990
 
 astroid==2.4.2
 isort==5.8.0
