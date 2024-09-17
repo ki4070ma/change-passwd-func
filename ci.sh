@@ -17,7 +17,7 @@ if ! python -m mypy . ; then
 fi
 
 (
-  python -m pytest --capture=no --verbose --cov . --cov-report=html
+  python -m pytest --capture=no --verbose --cov . --cov-report=xml
 )
 if [[ $? -ne 0 ]] ; then
   EXIT_STATUS=1
