@@ -12,5 +12,5 @@ class TestFindPswd(object):
 
     # TestIdx: 2
     def test_find_pswd_not_found(self):
-        pswd = load_system_pswd()[-1]*2
+        pswd = load_system_pswd()[-1] * 2
         assert not find_pswd(pswd)

@@ -7,15 +7,15 @@ from .constants import (
     MAX_SP_CHAR_NUM,
     MAX_VALID_LENGTH,
     MIN_VALID_LENGTH,
-    SP_CHARS
+    SP_CHARS,
 )
 from .log import LogMsgVerifyPswd
 
 
 def verify_pswd(pswd: str) -> bool:
-    print('\n[pswd]: {}'.format(pswd))  # '\n' is for pytest output
+    print("\n[pswd]: {}".format(pswd))  # '\n' is for pytest output
     if _check_length(pswd):
-        print('Password length is {}.'.format(len(pswd)))
+        print("Password length is {}.".format(len(pswd)))
         print(LogMsgVerifyPswd.INVALID_LENGTH)
     elif _include_invalid_char(pswd):
         print(LogMsgVerifyPswd.INVALID_CHAR)
@@ -34,27 +34,27 @@ def verify_pswd(pswd: str) -> bool:
 
 
 def _check_length(pswd: str) -> bool:
-    '''
+    """
     [Password requirement] 1. At least 18 alphanumeric characters and list of special chars !@#$&*
-    '''
+    """
     return len(pswd) < MIN_VALID_LENGTH or len(pswd) > MAX_VALID_LENGTH
 
 
 def _include_invalid_char(pswd: str) -> bool:
-    '''
+    """
     [Password requirement] 1. At least 18 alphanumeric characters and list of special chars !@#$&*
-    '''
+    """
     for x in pswd:
         # x.isalnum() unavailable for Hiragana, Kanji, etc
-        if not bool(re.search('[0-9a-zA-Z]', x)) and x not in SP_CHARS:
+        if not bool(re.search("[0-9a-zA-Z]", x)) and x not in SP_CHARS:
             return True
     return False
 
 
 def _include_not_all_patterns(pswd: str) -> bool:
-    '''
+    """
     [Password requirement] 2. At least 1 Upper case, 1 lower case ,least 1 numeric, 1 special character
-    '''
+    """
     upper_flg = False
     lower_flg = False
     num_flg = False
@@ -74,9 +74,9 @@ def _include_not_all_patterns(pswd: str) -> bool:
 
 
 def _include_over_continuous_same_chars(pswd: str) -> bool:
-    '''
+    """
     [Password requirement] 3. No duplicate repeat characters more than 4
-    '''
+    """
     count = 1
     prev_char = pswd[0]
     for x in list(pswd)[1:]:
@@ -92,9 +92,9 @@ def _include_over_continuous_same_chars(pswd: str) -> bool:
 
 
 def _include_over_sp_char_num(pswd: str) -> bool:
-    '''
+    """
     [Password requirement] 4. No more than 4 special characters
-    '''
+    """
     count = 0
     for c in SP_CHARS:
         count += pswd.count(c)
@@ -102,9 +102,9 @@ def _include_over_sp_char_num(pswd: str) -> bool:
 
 
 def _include_num_more_than_half_of_length(pswd: str) -> bool:
-    '''
+    """
     [Password requirement] 5. 50 % of password should not be a number
-    '''
+    """
     count = 0
     for c in pswd:
         if c.isnumeric():
